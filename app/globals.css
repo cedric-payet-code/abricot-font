@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  /* ===== Couleurs ===== */
+  /* ===== Couleurs (codes exacts de la maquette) ===== */
 
-  /* Brand (codes estimés : à remplacer par les vrais de Figma) */
-  --color-brand: #FF8A3D;          /* Main orange */
+  /* Brand */
+  --color-brand: #FF8B42;          /* Main orange */
   --color-brand-light: #FFE8D9;    /* Light orange */
   --color-brand-dark: #D3590B;     /* Dark orange */
 
@@ -20,13 +20,21 @@
 
   /* System */
   --color-success: #27AE60;
-  --color-success-light: #EAFBF0;
+  --color-success-light: #F1FFF7;
   --color-error: #EF4444;
   --color-error-light: #FFE0E0;
   --color-info: #3B82F6;
-  --color-info-light: #DBEAFE;
-  --color-warning: #E08D0B;
-  --color-warning-light: #FFF4E0;
+  --color-info-light: #E0ECFF;
+  --color-warning: #E08D00;
+  --color-warning-light: #FFF0D7;
+
+  /* ===== Couleurs de texte accessibles (contraste AA ≥ 4,5:1) ===== */
+  /* Versions assombries, à utiliser pour le TEXTE à la place des couleurs ci-dessus */
+  --color-brand-text: #A84505;     /* liens, onglets, textes orange */
+  --color-success-text: #1E7A45;   /* badge « Terminée » */
+  --color-error-text: #B91C1C;     /* badge « À faire », messages d'erreur */
+  --color-info-text: #1D4ED8;
+  --color-warning-text: #8A5200;   /* badge « En cours » */
 
   /* ===== Tailles de texte ===== */
 
