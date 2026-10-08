@@ -1,0 +1,12 @@
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+
+export default function MainLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex min-h-screen flex-col">
+      <Header />
+      <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-12">{children}</main>
+      <Footer />
+    </div>
+  );
+}
