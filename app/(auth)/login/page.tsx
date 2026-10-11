@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+import LoginForm from "@/components/auth/LoginForm";
+
+export const metadata: Metadata = {
+  title: "Connexion | Abricot",
+};
+
 export default function LoginPage() {
-  return <h1 className="text-h1 text-brand-dark">Connexion</h1>;
+  return <LoginForm />;
 }

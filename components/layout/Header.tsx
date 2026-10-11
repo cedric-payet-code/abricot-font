@@ -11,7 +11,11 @@ const links = [
   { href: "/projects", label: "Projets", Icon: ProjectsIcon },
 ];
 
-export default function Header() {
+type HeaderProps = {
+  initials: string;
+};
+
+export default function Header({ initials }: HeaderProps) {
   const pathname = usePathname();
   const isAccountPage = pathname === "/account";
 
@@ -23,7 +27,7 @@ export default function Header() {
           alt="Abricot - accueil"
           width={147}
           height={18}
-          className="h-auto w-24 md:w-[147px]"
+          className="h-auto w-24 md:w-36.75"
           priority
         />
       </Link>
@@ -66,7 +70,7 @@ export default function Header() {
             : "bg-brand-light text-grey-950 hover:text-white hover:bg-brand-dark"
         }`}
       >
-        AD
+        {initials}
       </Link>
     </header>
   );

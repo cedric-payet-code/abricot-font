@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+import RegisterForm from "@/components/auth/RegisterForm";
+
+export const metadata: Metadata = {
+  title: "Inscription | Abricot",
+};
+
 export default function RegisterPage() {
-  return <h1 className="text-h1 text-brand-dark">Inscription</h1>;
+  return <RegisterForm />;
 }

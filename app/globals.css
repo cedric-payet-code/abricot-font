@@ -58,13 +58,15 @@
   --text-caption-s: 0.625rem; /* 10px */
 }
 
-body {
-  background-color: var(--color-grey-50);
-  color: var(--color-grey-950);
-}
+@layer base {
+  body {
+    background-color: var(--color-grey-50);
+    color: var(--color-grey-950);
+  }
 
-/* Focus toujours visible pour la navigation au clavier */
-:focus-visible {
-  outline: 2px solid var(--color-brand-dark);
-  outline-offset: 2px;
+  /* Focus toujours visible pour la navigation au clavier */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-dark);
+    outline-offset: 2px;
+  }
 }
