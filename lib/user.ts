@@ -18,14 +18,3 @@ export const getCurrentUser = cache(async (): Promise<User | null> => {
     return null;
   }
 });
-
-export function getInitials(name?: string) {
-  if (!name) return "";
-  return name
-    .trim()
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((word) => word[0])
-    .join("")
-    .toUpperCase();
-}

@@ -1,6 +1,7 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { getCurrentUser, getInitials } from "@/lib/user";
+import { getInitials } from "@/lib/format";
+import { getCurrentUser } from "@/lib/user";
 
 export default async function MainLayout({ children }: { children: React.ReactNode }) {
   const user = await getCurrentUser();
