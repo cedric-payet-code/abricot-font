@@ -11,7 +11,7 @@ export default function Avatar({ name, highlighted = false, className = "" }: Av
     <span
       aria-hidden="true"
       title={name}
-      className={`flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full text-body-2xs text-grey-950 ring-2 ring-white ${
+      className={`flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full text-body-2xs text-grey-950 ${
         highlighted ? "bg-brand-light" : "bg-grey-200"
       } ${className}`}
     >

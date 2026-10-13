@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { api } from "@/lib/api";
 
 export type ProjectUser = {
@@ -24,10 +25,10 @@ export type Project = {
   userRole: ProjectRole;
 };
 
-export async function getProjects(): Promise<Project[]> {
+export const getProjects = cache(async (): Promise<Project[]> => {
   const result = await api("/projects");
   if (!result.success) {
     throw new Error(result.message ?? "Impossible de récupérer vos projets.");
   }
   return result.data?.projects ?? [];
-}
+});

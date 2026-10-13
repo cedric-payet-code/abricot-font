@@ -44,7 +44,7 @@ export default function Header({ initials }: HeaderProps) {
                   className={`group flex items-center gap-3 rounded-lg p-3 transition-colors duration-300 md:px-10 md:py-4 ${
                     isActive
                       ? "bg-grey-950 text-white"
-                      : "text-brand-text hover:bg-grey-950 hover:text-white"
+                      : "text-brand-dark hover:bg-grey-950 hover:text-white"
                   }`}
                 >
                   <Icon

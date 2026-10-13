@@ -56,7 +56,7 @@ export default function AuthForm({
         {footerText}{" "}
         <Link
           href={footerLinkHref}
-          className="ml-2.5 text-brand-text underline underline-offset-2 hover:text-grey-950"
+          className="ml-2.5 text-brand-dark underline underline-offset-2 hover:text-grey-950"
         >
           {footerLinkLabel}
         </Link>

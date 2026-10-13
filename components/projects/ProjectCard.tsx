@@ -30,7 +30,7 @@ export default function ProjectCard({ project, currentUserId }: ProjectCardProps
               <span
                 title={owner.name}
                 className={`rounded-full px-4 py-0.5 text-body-s ${
-                  isOwner ? "bg-brand-light text-brand-text" : "bg-grey-200 text-grey-800"
+                  isOwner ? "bg-brand-light text-brand-dark" : "bg-grey-200 text-grey-800"
                 }`}
               >
                 Propriétaire
@@ -39,7 +39,11 @@ export default function ProjectCard({ project, currentUserId }: ProjectCardProps
             </li>
             {members.map((member, index) => (
               <li key={member.id} className={index === 0 ? "ml-1.5" : "-ml-1.5"}>
-                <Avatar name={member.user.name} highlighted={member.user.id === currentUserId} />
+                <Avatar
+                  name={member.user.name}
+                  highlighted={member.user.id === currentUserId}
+                  className="ring-2 ring-white"
+                />
                 <span className="sr-only">
                   {member.user.id === currentUserId ? "Vous" : member.user.name}
                 </span>
