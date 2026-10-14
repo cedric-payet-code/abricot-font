@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { getProjects, type Project } from "@/lib/projects";
+import { getProjectProgress } from "@/lib/tasks";
 import { getCurrentUser } from "@/lib/user";
 
 export const metadata: Metadata = {
@@ -25,6 +26,8 @@ export default async function ProjectsPage() {
     );
   }
 
+  const progresses = await Promise.all(projects.map((project) => getProjectProgress(project.id)));
+
   return (
     <>
       <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
@@ -46,9 +49,13 @@ export default async function ProjectsPage() {
         </p>
       ) : (
         <ul className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <li key={project.id}>
-              <ProjectCard project={project} currentUserId={user?.id} />
+              <ProjectCard
+                project={project}
+                currentUserId={user?.id}
+                progress={progresses[index]}
+              />
             </li>
           ))}
         </ul>

@@ -28,7 +28,7 @@ export default function ProjectContributors({ project, currentUserId }: ProjectC
           <Avatar name={owner.name} highlighted={isOwner} />
           <span
             title={owner.name}
-            className={`rounded-full px-4 py-0.5 text-body-s ${
+            className={`rounded-[10px] px-4 py-0.5 text-body-s ${
               isOwner ? "bg-brand-light text-brand-dark" : "bg-grey-200 text-grey-800"
             }`}
           >
@@ -43,7 +43,7 @@ export default function ProjectContributors({ project, currentUserId }: ProjectC
             <li key={id} className="flex items-center gap-1.5">
               <Avatar name={user.name} highlighted={isMe} />
               <span
-                className={`rounded-full px-4 py-0.5 text-body-s ${
+                className={`rounded-[10px] px-4 py-0.5 text-body-s ${
                   isMe ? "bg-brand-light text-brand-dark" : "bg-grey-200 text-grey-800"
                 }`}
               >
