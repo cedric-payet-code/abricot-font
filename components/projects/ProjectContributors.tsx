@@ -23,10 +23,10 @@ export default function ProjectContributors({ project }: ProjectContributorsProp
 
       <ul className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <li className="flex items-center gap-1.5">
-          <Avatar name={owner.name} />
+          <Avatar name={owner.name} highlighted />
           <span
             title={owner.name}
-            className="rounded-[10px] bg-grey-200 px-4 py-0.5 text-body-s text-grey-800"
+            className="rounded-[10px] bg-brand-light px-4 py-0.5 text-body-s text-brand-dark"
           >
             Propriétaire
           </span>

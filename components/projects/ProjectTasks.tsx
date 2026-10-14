@@ -1,12 +1,34 @@
+"use client";
+
+import { useState } from "react";
 import { CalendarIcon, ChevronDownIcon, ListIcon, SearchIcon } from "@/components/icons/UiIcons";
 import TaskCard from "@/components/tasks/TaskCard";
-import type { Task } from "@/lib/tasks";
+import type { Task, TaskStatus } from "@/lib/tasks";
 
 type ProjectTasksProps = {
   tasks: Task[] | null;
 };
 
+function normalize(text: string) {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
 export default function ProjectTasks({ tasks }: ProjectTasksProps) {
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState<TaskStatus | "">("");
+
+  const query = normalize(search.trim());
+  const filteredTasks = (tasks ?? []).filter((task) => {
+    const matchesStatus = !status || task.status === status;
+    const matchesSearch =
+      !query || normalize(`${task.title} ${task.description ?? ""}`).includes(query);
+    return matchesStatus && matchesSearch;
+  });
+  const isFiltering = Boolean(query || status);
+
   return (
     <section
       aria-labelledby="tasks-title"
@@ -46,13 +68,15 @@ export default function ProjectTasks({ tasks }: ProjectTasksProps) {
             </label>
             <select
               id="status-filter"
-              defaultValue=""
+              value={status}
+              onChange={(event) => setStatus(event.target.value as TaskStatus | "")}
               className="h-[62px] w-full appearance-none rounded border border-grey-200 bg-white pr-12 pl-8 text-body-s text-grey-600 transition-colors hover:border-grey-400 focus:border-brand-dark focus:ring-1 focus:ring-brand-dark focus-visible:outline-none md:w-[152px]"
             >
               <option value="">Statut</option>
               <option value="TODO">À faire</option>
               <option value="IN_PROGRESS">En cours</option>
               <option value="DONE">Terminée</option>
+              <option value="CANCELLED">Annulée</option>
             </select>
             <ChevronDownIcon className="pointer-events-none absolute top-1/2 right-6 -translate-y-1/2 text-grey-600" />
           </div>
@@ -65,6 +89,8 @@ export default function ProjectTasks({ tasks }: ProjectTasksProps) {
               id="task-search"
               type="search"
               placeholder="Rechercher une tâche"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
               className="h-[62px] w-full rounded border border-grey-200 bg-white pr-14 pl-8 text-body-s text-grey-950 transition-colors placeholder:text-grey-600 hover:border-grey-400 focus:border-brand-dark focus:ring-1 focus:ring-brand-dark focus-visible:outline-none md:w-[283px]"
             />
             <SearchIcon className="pointer-events-none absolute top-1/2 right-8 -translate-y-1/2 text-grey-600" />
@@ -80,13 +106,25 @@ export default function ProjectTasks({ tasks }: ProjectTasksProps) {
         ) : tasks.length === 0 ? (
           <p className="text-body-m text-grey-600">Aucune tâche pour le moment.</p>
         ) : (
-          <ul className="flex flex-col gap-4">
-            {tasks.map((task) => (
-              <li key={task.id}>
-                <TaskCard task={task} />
-              </li>
-            ))}
-          </ul>
+          <>
+            <p aria-live="polite" className="sr-only">
+              {isFiltering &&
+                `${filteredTasks.length} ${filteredTasks.length > 1 ? "tâches trouvées" : "tâche trouvée"}`}
+            </p>
+            {filteredTasks.length === 0 ? (
+              <p className="text-body-m text-grey-600">
+                Aucune tâche ne correspond à votre recherche.
+              </p>
+            ) : (
+              <ul className="flex flex-col gap-4">
+                {filteredTasks.map((task) => (
+                  <li key={task.id}>
+                    <TaskCard task={task} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
         )}
       </div>
     </section>
