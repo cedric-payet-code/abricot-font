@@ -4,57 +4,57 @@
   /* ===== Couleurs (codes exacts de la maquette) ===== */
 
   /* Brand */
-  --color-brand: #FF8B42;          /* Main orange */
-  --color-brand-light: #FFE8D9;    /* Light orange */
-  --color-brand-dark: #D3590B;     /* Dark orange */
+  --color-brand: #ff8b42; /* Main orange */
+  --color-brand-light: #ffe8d9; /* Light orange */
+  --color-brand-dark: #d3590b; /* Dark orange */
 
   /* Neutral */
-  --color-grey-950: #0F0F0F;
-  --color-grey-800: #1F1F1F;
-  --color-grey-600: #6B7280;
-  --color-grey-400: #9CA3AF;
-  --color-grey-200: #E5E7EB;
-  --color-grey-100: #F3F4F6;
-  --color-grey-50: #F9FAFB;
-  --color-white: #FFFFFF;
+  --color-grey-950: #0f0f0f;
+  --color-grey-800: #1f1f1f;
+  --color-grey-600: #6b7280;
+  --color-grey-400: #9ca3af;
+  --color-grey-200: #e5e7eb;
+  --color-grey-100: #f3f4f6;
+  --color-grey-50: #f9fafb;
+  --color-white: #ffffff;
 
   /* System */
-  --color-success: #27AE60;
-  --color-success-light: #F1FFF7;
-  --color-error: #EF4444;
-  --color-error-light: #FFE0E0;
-  --color-info: #3B82F6;
-  --color-info-light: #E0ECFF;
-  --color-warning: #E08D00;
-  --color-warning-light: #FFF0D7;
+  --color-success: #27ae60;
+  --color-success-light: #f1fff7;
+  --color-error: #ef4444;
+  --color-error-light: #ffe0e0;
+  --color-info: #3b82f6;
+  --color-info-light: #e0ecff;
+  --color-warning: #e08d00;
+  --color-warning-light: #fff0d7;
 
   /* ===== Couleurs de texte accessibles (contraste AA ≥ 4,5:1) ===== */
   /* Versions assombries, à utiliser pour le TEXTE à la place des couleurs ci-dessus */
-  --color-brand-text: #A84505;     /* liens, onglets, textes orange */
-  --color-success-text: #1E7A45;   /* badge « Terminée » */
-  --color-error-text: #B91C1C;     /* badge « À faire », messages d'erreur */
-  --color-info-text: #1D4ED8;
-  --color-warning-text: #8A5200;   /* badge « En cours » */
+  --color-brand-text: #a84505; /* liens, onglets, textes orange */
+  --color-success-text: #1e7a45; /* badge « Terminée » */
+  --color-error-text: #b91c1c; /* badge « À faire », messages d'erreur */
+  --color-info-text: #1d4ed8;
+  --color-warning-text: #8a5200; /* badge « En cours » */
 
   /* ===== Tailles de texte ===== */
 
   /* Headings */
-  --text-h1: 2.5rem;      /* 40px */
-  --text-h2: 2rem;        /* 32px */
-  --text-h3: 1.75rem;     /* 28px */
-  --text-h4: 1.5rem;      /* 24px */
-  --text-h5: 1.125rem;    /* 18px */
+  --text-h1: 2.5rem; /* 40px */
+  --text-h2: 2rem; /* 32px */
+  --text-h3: 1.75rem; /* 28px */
+  --text-h4: 1.5rem; /* 24px */
+  --text-h5: 1.125rem; /* 18px */
 
   /* Body */
-  --text-body-l: 1.125rem;   /* 18px */
-  --text-body-m: 1rem;       /* 16px */
-  --text-body-s: 0.875rem;   /* 14px */
-  --text-body-xs: 0.75rem;   /* 12px */
+  --text-body-l: 1.125rem; /* 18px */
+  --text-body-m: 1rem; /* 16px */
+  --text-body-s: 0.875rem; /* 14px */
+  --text-body-xs: 0.75rem; /* 12px */
   --text-body-2xs: 0.625rem; /* 10px */
 
   /* Caption (à utiliser avec la classe uppercase) */
   --text-caption-l: 0.875rem; /* 14px */
-  --text-caption-m: 0.75rem;  /* 12px */
+  --text-caption-m: 0.75rem; /* 12px */
   --text-caption-s: 0.625rem; /* 10px */
 }
 

@@ -3,13 +3,11 @@ import type { Project } from "@/lib/projects";
 
 type ProjectContributorsProps = {
   project: Project;
-  currentUserId?: string;
 };
 
-export default function ProjectContributors({ project, currentUserId }: ProjectContributorsProps) {
+export default function ProjectContributors({ project }: ProjectContributorsProps) {
   const { owner, members } = project;
   const teamSize = members.length + 1;
-  const isOwner = owner.id === currentUserId;
 
   return (
     <section
@@ -25,30 +23,22 @@ export default function ProjectContributors({ project, currentUserId }: ProjectC
 
       <ul className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <li className="flex items-center gap-1.5">
-          <Avatar name={owner.name} highlighted={isOwner} />
+          <Avatar name={owner.name} />
           <span
             title={owner.name}
-            className={`rounded-[10px] px-4 py-0.5 text-body-s ${
-              isOwner ? "bg-brand-light text-brand-dark" : "bg-grey-200 text-grey-800"
-            }`}
+            className="rounded-[10px] bg-grey-200 px-4 py-0.5 text-body-s text-grey-800"
           >
             Propriétaire
           </span>
-          <span className="sr-only">: {isOwner ? "vous" : owner.name}</span>
+          <span className="sr-only">: {owner.name}</span>
         </li>
 
         {members.map(({ id, user }) => {
-          const isMe = user.id === currentUserId;
           return (
             <li key={id} className="flex items-center gap-1.5">
-              <Avatar name={user.name} highlighted={isMe} />
-              <span
-                className={`rounded-[10px] px-4 py-0.5 text-body-s ${
-                  isMe ? "bg-brand-light text-brand-dark" : "bg-grey-200 text-grey-800"
-                }`}
-              >
+              <Avatar name={user.name} />
+              <span className="rounded-[10px] bg-grey-200 px-4 py-0.5 text-body-s text-grey-800">
                 {user.name}
-                {isMe && <span className="sr-only"> (vous)</span>}
               </span>
             </li>
           );

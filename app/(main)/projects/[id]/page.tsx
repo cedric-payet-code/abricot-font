@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import ProjectContributors from "@/components/projects/ProjectContributors";
 import ProjectTasks from "@/components/projects/ProjectTasks";
 import { getProjects } from "@/lib/projects";
-import { getCurrentUser } from "@/lib/user";
+import { getProjectTasks, sortByPriority } from "@/lib/tasks";
 
 type ProjectPageProps = {
   params: Promise<{ id: string }>;
@@ -23,7 +23,6 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { id } = await params;
-  const user = await getCurrentUser();
 
   let project;
   try {
@@ -43,6 +42,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) notFound();
 
   const canEdit = project.userRole === "ADMIN";
+  const tasks = await getProjectTasks(id)
+    .then(sortByPriority)
+    .catch(() => null);
 
   return (
     <div className="flex flex-col gap-8 md:gap-12">
@@ -93,9 +95,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
       </div>
 
-      <ProjectContributors project={project} currentUserId={user?.id} />
+      <ProjectContributors project={project} />
 
-      <ProjectTasks />
+      <ProjectTasks tasks={tasks} />
     </div>
   );
 }

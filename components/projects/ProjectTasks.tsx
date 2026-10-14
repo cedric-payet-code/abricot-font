@@ -1,6 +1,12 @@
 import { CalendarIcon, ChevronDownIcon, ListIcon, SearchIcon } from "@/components/icons/UiIcons";
+import TaskCard from "@/components/tasks/TaskCard";
+import type { Task } from "@/lib/tasks";
 
-export default function ProjectTasks() {
+type ProjectTasksProps = {
+  tasks: Task[] | null;
+};
+
+export default function ProjectTasks({ tasks }: ProjectTasksProps) {
   return (
     <section
       aria-labelledby="tasks-title"
@@ -19,7 +25,7 @@ export default function ProjectTasks() {
             <button
               type="button"
               aria-pressed="true"
-              className="flex h-[45px] items-center gap-2 rounded bg-brand-light px-4 text-body-s text-brand-dark"
+              className="flex h-[45px] items-center gap-2 rounded-lg bg-brand-light px-4 text-body-s text-brand-dark"
             >
               <ListIcon className="text-brand-dark" />
               Liste
@@ -27,7 +33,7 @@ export default function ProjectTasks() {
             <button
               type="button"
               aria-pressed="false"
-              className="flex h-[45px] items-center gap-2 rounded px-4 text-body-s text-brand-dark transition-colors hover:bg-brand-light"
+              className="flex h-[45px] items-center gap-2 rounded-lg px-4 text-body-s text-brand-dark transition-colors hover:bg-brand-light"
             >
               <CalendarIcon className="text-brand-dark" />
               Calendrier
@@ -66,7 +72,23 @@ export default function ProjectTasks() {
         </div>
       </div>
 
-      <div className="mt-10 min-h-40" />
+      <div className="mt-10">
+        {tasks === null ? (
+          <p role="alert" className="text-body-m text-error-text">
+            Impossible de récupérer les tâches de ce projet.
+          </p>
+        ) : tasks.length === 0 ? (
+          <p className="text-body-m text-grey-600">Aucune tâche pour le moment.</p>
+        ) : (
+          <ul className="flex flex-col gap-4">
+            {tasks.map((task) => (
+              <li key={task.id}>
+                <TaskCard task={task} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </section>
   );
 }

@@ -2,15 +2,12 @@ import type { Metadata } from "next";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { getProjects, type Project } from "@/lib/projects";
 import { getProjectProgress } from "@/lib/tasks";
-import { getCurrentUser } from "@/lib/user";
 
 export const metadata: Metadata = {
   title: "Mes projets | Abricot",
 };
 
 export default async function ProjectsPage() {
-  const user = await getCurrentUser();
-
   let projects: Project[];
   try {
     projects = await getProjects();
@@ -51,11 +48,7 @@ export default async function ProjectsPage() {
         <ul className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <li key={project.id}>
-              <ProjectCard
-                project={project}
-                currentUserId={user?.id}
-                progress={progresses[index]}
-              />
+              <ProjectCard project={project} progress={progresses[index]} />
             </li>
           ))}
         </ul>

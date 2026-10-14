@@ -6,14 +6,12 @@ import type { Progress } from "@/lib/tasks";
 
 type ProjectCardProps = {
   project: Project;
-  currentUserId?: string;
   progress: Progress | null;
 };
 
-export default function ProjectCard({ project, currentUserId, progress }: ProjectCardProps) {
+export default function ProjectCard({ project, progress }: ProjectCardProps) {
   const { id, name, description, owner, members } = project;
   const teamSize = members.length + 1;
-  const isOwner = owner.id === currentUserId;
 
   return (
     <article className="h-full">
@@ -32,27 +30,19 @@ export default function ProjectCard({ project, currentUserId, progress }: Projec
 
             <ul className="flex flex-wrap items-center" aria-label={`Équipe du projet ${name}`}>
               <li className="flex items-center gap-1.5">
-                <Avatar name={owner.name} highlighted={isOwner} />
+                <Avatar name={owner.name} highlighted />
                 <span
                   title={owner.name}
-                  className={`rounded-[10px] px-4 py-0.5 text-body-s ${
-                    isOwner ? "bg-brand-light text-brand-dark" : "bg-grey-200 text-grey-800"
-                  }`}
+                  className="rounded-[10px] bg-brand-light px-4 py-0.5 text-body-s text-brand-dark"
                 >
                   Propriétaire
                 </span>
-                <span className="sr-only">: {isOwner ? "vous" : owner.name}</span>
+                <span className="sr-only">: {owner.name}</span>
               </li>
               {members.map((member, index) => (
                 <li key={member.id} className={index === 0 ? "ml-1.5" : "-ml-1.5"}>
-                  <Avatar
-                    name={member.user.name}
-                    highlighted={member.user.id === currentUserId}
-                    className="ring-2 ring-white"
-                  />
-                  <span className="sr-only">
-                    {member.user.id === currentUserId ? "Vous" : member.user.name}
-                  </span>
+                  <Avatar name={member.user.name} className="ring-2 ring-white" />
+                  <span className="sr-only">{member.user.name}</span>
                 </li>
               ))}
             </ul>
