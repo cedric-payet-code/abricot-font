@@ -32,6 +32,8 @@ export type Task = {
   projectId: string;
   assignees?: TaskAssignee[];
   comments?: TaskComment[];
+  project?: { id: string; name: string };
+  _count?: { comments?: number };
 };
 
 const PRIORITY_ORDER: Record<TaskPriority, number> = {
@@ -67,3 +69,11 @@ export async function getProjectProgress(projectId: string): Promise<Progress | 
     return null;
   }
 }
+
+export const getAssignedTasks = cache(async (): Promise<Task[]> => {
+  const result = await api("/dashboard/assigned-tasks");
+  if (!result.success) {
+    throw new Error(result.message ?? "Impossible de récupérer vos tâches.");
+  }
+  return Array.isArray(result.data) ? result.data : (result.data?.tasks ?? []);
+});

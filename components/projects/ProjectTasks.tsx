@@ -1,33 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { CalendarIcon, ChevronDownIcon, ListIcon, SearchIcon } from "@/components/icons/UiIcons";
+import { CalendarIcon, ChevronDownIcon, ListIcon } from "@/components/icons/UiIcons";
+import ResultsAnnouncement from "@/components/tasks/ResultsAnnouncement";
 import TaskCard from "@/components/tasks/TaskCard";
+import SearchField from "@/components/ui/SearchField";
+import { filterTasks } from "@/lib/task-filters";
 import type { Task, TaskStatus } from "@/lib/tasks";
 
 type ProjectTasksProps = {
   tasks: Task[] | null;
 };
 
-function normalize(text: string) {
-  return text
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
-}
-
 export default function ProjectTasks({ tasks }: ProjectTasksProps) {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<TaskStatus | "">("");
 
-  const query = normalize(search.trim());
-  const filteredTasks = (tasks ?? []).filter((task) => {
-    const matchesStatus = !status || task.status === status;
-    const matchesSearch =
-      !query || normalize(`${task.title} ${task.description ?? ""}`).includes(query);
-    return matchesStatus && matchesSearch;
-  });
-  const isFiltering = Boolean(query || status);
+  const filteredTasks = filterTasks(tasks ?? [], { search, status });
+  const isFiltering = Boolean(search.trim() || status);
 
   return (
     <section
@@ -81,20 +71,13 @@ export default function ProjectTasks({ tasks }: ProjectTasksProps) {
             <ChevronDownIcon className="pointer-events-none absolute top-1/2 right-6 -translate-y-1/2 text-grey-600" />
           </div>
 
-          <div className="relative">
-            <label htmlFor="task-search" className="sr-only">
-              Rechercher une tâche
-            </label>
-            <input
-              id="task-search"
-              type="search"
-              placeholder="Rechercher une tâche"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              className="h-[62px] w-full rounded border border-grey-200 bg-white pr-14 pl-8 text-body-s text-grey-950 transition-colors placeholder:text-grey-600 hover:border-grey-400 focus:border-brand-dark focus:ring-1 focus:ring-brand-dark focus-visible:outline-none md:w-[283px]"
-            />
-            <SearchIcon className="pointer-events-none absolute top-1/2 right-8 -translate-y-1/2 text-grey-600" />
-          </div>
+          <SearchField
+            id="task-search"
+            label="Rechercher une tâche"
+            value={search}
+            onChange={setSearch}
+            className="md:w-[283px]"
+          />
         </div>
       </div>
 
@@ -107,10 +90,7 @@ export default function ProjectTasks({ tasks }: ProjectTasksProps) {
           <p className="text-body-m text-grey-600">Aucune tâche pour le moment.</p>
         ) : (
           <>
-            <p aria-live="polite" className="sr-only">
-              {isFiltering &&
-                `${filteredTasks.length} ${filteredTasks.length > 1 ? "tâches trouvées" : "tâche trouvée"}`}
-            </p>
+            <ResultsAnnouncement count={filteredTasks.length} active={isFiltering} />
             {filteredTasks.length === 0 ? (
               <p className="text-body-m text-grey-600">
                 Aucune tâche ne correspond à votre recherche.
