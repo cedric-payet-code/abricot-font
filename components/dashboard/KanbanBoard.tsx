@@ -18,10 +18,6 @@ function isInMonth(dueDate: string | undefined, reference: Date) {
   return date.getFullYear() === reference.getFullYear() && date.getMonth() === reference.getMonth();
 }
 
-function formatMonth(date: Date) {
-  return new Intl.DateTimeFormat("fr-FR", { month: "long", year: "numeric" }).format(date);
-}
-
 export default function KanbanBoard({ tasks, projectNames }: KanbanBoardProps) {
   if (tasks === null) {
     return (
@@ -36,13 +32,6 @@ export default function KanbanBoard({ tasks, projectNames }: KanbanBoardProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      <p className="sr-only">
-        Tâches à échéance en{" "}
-        <time dateTime={`${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`}>
-          {formatMonth(today)}
-        </time>
-      </p>
-
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {COLUMNS.map(({ status, title }) => {
           const columnTasks = monthTasks.filter((task) => task.status === status);
