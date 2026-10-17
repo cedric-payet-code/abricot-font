@@ -1,12 +1,17 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { updateProject } from "@/app/(main)/projects/actions";
+import { updateProject, type UserSearchResult } from "@/app/(main)/projects/actions";
 import ProjectForm from "@/components/projects/ProjectForm";
 import Modal from "@/components/ui/Modal";
 
 type EditProjectButtonProps = {
-  project: { id: string; name: string; description?: string | null };
+  project: {
+    id: string;
+    name: string;
+    description?: string | null;
+    contributors: UserSearchResult[];
+  };
 };
 
 export default function EditProjectButton({ project }: EditProjectButtonProps) {

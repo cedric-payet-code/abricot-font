@@ -7,7 +7,11 @@ import TextField from "@/components/ui/TextField";
 
 type ProjectFormProps = {
   action: (state: ProjectFormState, formData: FormData) => Promise<ProjectFormState>;
-  project?: { name: string; description?: string | null };
+  project?: {
+    name: string;
+    description?: string | null;
+    contributors: UserSearchResult[];
+  };
   submitLabel: string;
   pendingLabel: string;
   onSuccess: () => void;
@@ -27,7 +31,8 @@ export default function ProjectForm({
   const initialDescription = project?.description ?? "";
   const [name, setName] = useState(initialName);
   const [description, setDescription] = useState(initialDescription);
-  const [contributors, setContributors] = useState<UserSearchResult[]>([]);
+  const initialContributors = project?.contributors ?? [];
+  const [contributors, setContributors] = useState<UserSearchResult[]>(initialContributors);
 
   useEffect(() => {
     if (state?.success) onSuccess();
@@ -37,7 +42,9 @@ export default function ProjectForm({
   const hasChanged =
     !project ||
     name.trim() !== initialName.trim() ||
-    description.trim() !== initialDescription.trim();
+    description.trim() !== initialDescription.trim() ||
+    contributors.length !== initialContributors.length ||
+    contributors.some((user) => !initialContributors.some((initial) => initial.id === user.id));
   const canSubmit = isComplete && hasChanged && !pending;
 
   return (
@@ -64,14 +71,12 @@ export default function ProjectForm({
         onChange={(event) => setDescription(event.target.value)}
         error={state?.fieldErrors?.description}
       />
-      {!project && (
-        <ContributorSelect
-          name="contributors"
-          value={contributors}
-          onChange={setContributors}
-          error={state?.fieldErrors?.contributors}
-        />
-      )}
+      <ContributorSelect
+        name="contributors"
+        value={contributors}
+        onChange={setContributors}
+        error={state?.fieldErrors?.contributors}
+      />
 
       {state?.error && (
         <p role="alert" className="rounded bg-error-light px-4 py-3 text-body-s text-error-text">

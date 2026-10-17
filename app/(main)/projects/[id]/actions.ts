@@ -111,3 +111,19 @@ export async function updateTask(
   refreshPages(projectId);
   return { success: true };
 }
+
+export type DeleteState = { success?: boolean; error?: string } | undefined;
+
+export async function deleteTask(projectId: string, taskId: string): Promise<DeleteState> {
+  try {
+    const result = await api(`/projects/${projectId}/tasks/${taskId}`, { method: "DELETE" });
+    if (!result.success) {
+      return { error: result.message ?? "La suppression de la tâche a échoué." };
+    }
+  } catch {
+    return { error: SERVER_ERROR };
+  }
+
+  refreshPages(projectId);
+  return { success: true };
+}

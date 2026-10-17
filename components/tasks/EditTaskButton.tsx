@@ -1,10 +1,11 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { updateTask } from "@/app/(main)/projects/[id]/actions";
+import { deleteTask, updateTask } from "@/app/(main)/projects/[id]/actions";
 import { DotsIcon } from "@/components/icons/UiIcons";
 import type { Member } from "@/components/tasks/AssigneeSelect";
 import TaskForm from "@/components/tasks/TaskForm";
+import ConfirmDelete from "@/components/ui/ConfirmDelete";
 import Modal from "@/components/ui/Modal";
 import type { Task } from "@/lib/tasks";
 
@@ -16,7 +17,13 @@ type EditTaskButtonProps = {
 
 export default function EditTaskButton({ projectId, task, members }: EditTaskButtonProps) {
   const [open, setOpen] = useState(false);
-  const close = useCallback(() => setOpen(false), []);
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
+
+  const close = useCallback(() => {
+    setOpen(false);
+    setConfirmingDelete(false);
+  }, []);
+  const cancelDelete = useCallback(() => setConfirmingDelete(false), []);
 
   return (
     <>
@@ -30,15 +37,45 @@ export default function EditTaskButton({ projectId, task, members }: EditTaskBut
         <DotsIcon />
       </button>
 
-      <Modal open={open} onClose={close} title="Modifier">
-        <TaskForm
-          action={updateTask.bind(null, projectId, task.id)}
-          members={members}
-          task={task}
-          submitLabel="Enregistrer"
-          pendingLabel="Enregistrement…"
-          onSuccess={close}
-        />
+      <Modal
+        open={open}
+        onClose={close}
+        title={confirmingDelete ? "Supprimer la tâche" : "Modifier"}
+      >
+        {confirmingDelete ? (
+          <ConfirmDelete
+            action={deleteTask.bind(null, projectId, task.id)}
+            message={
+              <p>
+                La tâche <strong className="font-semibold text-grey-950">{task.title}</strong> et
+                ses commentaires seront définitivement supprimés.
+              </p>
+            }
+            confirmLabel="Supprimer la tâche"
+            onCancel={cancelDelete}
+            onSuccess={close}
+          />
+        ) : (
+          <>
+            <TaskForm
+              action={updateTask.bind(null, projectId, task.id)}
+              members={members}
+              task={task}
+              submitLabel="Enregistrer"
+              pendingLabel="Enregistrement…"
+              onSuccess={close}
+            />
+            <div className="mt-8 border-t border-grey-200 pt-6">
+              <button
+                type="button"
+                onClick={() => setConfirmingDelete(true)}
+                className="flex h-[50px] items-center rounded-[10px] border border-brand-dark bg-white px-6 text-body-m text-brand-dark transition-colors hover:bg-brand-dark hover:text-white"
+              >
+                Supprimer la tâche
+              </button>
+            </div>
+          </>
+        )}
       </Modal>
     </>
   );

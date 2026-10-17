@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { api } from "@/lib/api";
+import { getProjects } from "@/lib/projects";
 import { getCurrentUser } from "@/lib/user";
 
 export type ProjectFormState =
@@ -81,6 +82,9 @@ export async function updateProject(
   formData: FormData
 ): Promise<ProjectFormState> {
   const { name, description } = readProjectForm(formData);
+  const contributorEmails = formData
+    .getAll("contributors")
+    .map((email) => String(email).toLowerCase());
 
   const invalid = validate({ name, description });
   if (invalid) return invalid;
@@ -97,6 +101,34 @@ export async function updateProject(
         fieldErrors: toFieldErrors(result.data?.errors),
       };
     }
+
+    const project = (await getProjects()).find((item) => item.id === projectId);
+    const currentMembers = project?.members.map(({ user }) => user) ?? [];
+    const currentEmails = currentMembers.map((user) => user.email.toLowerCase());
+
+    const emailsToAdd = contributorEmails.filter((email) => !currentEmails.includes(email));
+    const membersToRemove = currentMembers.filter(
+      (user) => !contributorEmails.includes(user.email.toLowerCase())
+    );
+
+    for (const email of emailsToAdd) {
+      const added = await api(`/projects/${projectId}/contributors`, {
+        method: "POST",
+        body: JSON.stringify({ email }),
+      });
+      if (!added.success) {
+        return { error: added.message ?? `Impossible d'ajouter ${email}.` };
+      }
+    }
+
+    for (const user of membersToRemove) {
+      const removed = await api(`/projects/${projectId}/contributors/${user.id}`, {
+        method: "DELETE",
+      });
+      if (!removed.success) {
+        return { error: removed.message ?? `Impossible de retirer ${user.name}.` };
+      }
+    }
   } catch {
     return { error: SERVER_ERROR };
   }
@@ -105,6 +137,21 @@ export async function updateProject(
   revalidatePath("/projects");
   revalidatePath("/dashboard");
   return { success: true };
+}
+
+export async function deleteProject(projectId: string): Promise<{ error?: string }> {
+  try {
+    const result = await api(`/projects/${projectId}`, { method: "DELETE" });
+    if (!result.success) {
+      return { error: result.message ?? "La suppression du projet a échoué." };
+    }
+  } catch {
+    return { error: SERVER_ERROR };
+  }
+
+  revalidatePath("/projects");
+  revalidatePath("/dashboard");
+  redirect("/projects");
 }
 
 export async function searchUsers(query: string): Promise<UserSearchResult[]> {

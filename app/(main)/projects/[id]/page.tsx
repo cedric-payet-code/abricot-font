@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import DeleteProjectButton from "@/components/projects/DeleteProjectButton";
 import EditProjectButton from "@/components/projects/EditProjectButton";
 import ProjectContributors from "@/components/projects/ProjectContributors";
 import ProjectTasks from "@/components/projects/ProjectTasks";
 import CreateTaskButton from "@/components/tasks/CreateTaskButton";
 import { getProjects } from "@/lib/projects";
 import { getProjectTasks, sortByPriority } from "@/lib/tasks";
+import { getCurrentUser } from "@/lib/user";
 
 type ProjectPageProps = {
   params: Promise<{ id: string }>;
@@ -44,6 +46,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) notFound();
 
   const canEdit = project.userRole === "ADMIN";
+  const currentUser = await getCurrentUser();
+  const isOwner = currentUser?.id === project.owner.id;
   const members = [
     { id: project.owner.id, name: project.owner.name },
     ...project.members.map(({ user }) => ({ id: user.id, name: user.name })),
@@ -75,6 +79,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     id: project.id,
                     name: project.name,
                     description: project.description,
+                    contributors: project.members.map(({ user }) => user),
                   }}
                 />
               )}
@@ -85,7 +90,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </div>
 
-        <div className="flex shrink-0 gap-3">
+        <div className="flex shrink-0 flex-wrap gap-3">
           <CreateTaskButton projectId={project.id} members={members} />
           <button
             type="button"
@@ -94,6 +99,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <span aria-hidden="true">✦</span>
             IA
           </button>
+          {isOwner && <DeleteProjectButton project={{ id: project.id, name: project.name }} />}
         </div>
       </div>
 
