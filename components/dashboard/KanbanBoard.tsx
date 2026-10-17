@@ -12,6 +12,16 @@ const COLUMNS: { status: TaskStatus; title: string }[] = [
   { status: "DONE", title: "Terminées" },
 ];
 
+function isInMonth(dueDate: string | undefined, reference: Date) {
+  if (!dueDate) return false;
+  const date = new Date(dueDate);
+  return date.getFullYear() === reference.getFullYear() && date.getMonth() === reference.getMonth();
+}
+
+function formatMonth(date: Date) {
+  return new Intl.DateTimeFormat("fr-FR", { month: "long", year: "numeric" }).format(date);
+}
+
 export default function KanbanBoard({ tasks, projectNames }: KanbanBoardProps) {
   if (tasks === null) {
     return (
@@ -21,44 +31,56 @@ export default function KanbanBoard({ tasks, projectNames }: KanbanBoardProps) {
     );
   }
 
+  const today = new Date();
+  const monthTasks = tasks.filter((task) => isInMonth(task.dueDate, today));
+
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-      {COLUMNS.map(({ status, title }) => {
-        const columnTasks = tasks.filter((task) => task.status === status);
-        const titleId = `kanban-${status}`;
+    <div className="flex flex-col gap-6">
+      <p className="sr-only">
+        Tâches à échéance en{" "}
+        <time dateTime={`${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`}>
+          {formatMonth(today)}
+        </time>
+      </p>
 
-        return (
-          <section
-            key={status}
-            aria-labelledby={titleId}
-            className="flex flex-col gap-10 rounded-[10px] border border-brand-light bg-white px-6 py-10"
-          >
-            <h2 id={titleId} className="flex items-center gap-2 text-h5 text-grey-950">
-              {title}
-              <span className="rounded-full bg-grey-200 px-4 py-0.5 text-body-xs text-grey-800">
-                {columnTasks.length}
-                <span className="sr-only"> {columnTasks.length > 1 ? "tâches" : "tâche"}</span>
-              </span>
-            </h2>
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        {COLUMNS.map(({ status, title }) => {
+          const columnTasks = monthTasks.filter((task) => task.status === status);
+          const titleId = `kanban-${status}`;
 
-            {columnTasks.length === 0 ? (
-              <p className="text-body-s text-grey-600">Aucune tâche.</p>
-            ) : (
-              <ul className="flex flex-col gap-4">
-                {columnTasks.map((task) => (
-                  <li key={task.id}>
-                    <AssignedTaskCard
-                      task={task}
-                      projectName={task.project?.name ?? projectNames[task.projectId]}
-                      layout="stacked"
-                    />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </section>
-        );
-      })}
+          return (
+            <section
+              key={status}
+              aria-labelledby={titleId}
+              className="flex flex-col gap-10 rounded-[10px] border border-brand-light bg-white px-6 py-10"
+            >
+              <h2 id={titleId} className="flex items-center gap-2 text-h5 text-grey-950">
+                {title}
+                <span className="rounded-full bg-grey-200 px-4 py-0.5 text-body-xs text-grey-800">
+                  {columnTasks.length}
+                  <span className="sr-only"> {columnTasks.length > 1 ? "tâches" : "tâche"}</span>
+                </span>
+              </h2>
+
+              {columnTasks.length === 0 ? (
+                <p className="text-body-s text-grey-600">Aucune tâche ce mois-ci.</p>
+              ) : (
+                <ul className="flex flex-col gap-4">
+                  {columnTasks.map((task) => (
+                    <li key={task.id}>
+                      <AssignedTaskCard
+                        task={task}
+                        projectName={task.project?.name ?? projectNames[task.projectId]}
+                        layout="stacked"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          );
+        })}
+      </div>
     </div>
   );
 }

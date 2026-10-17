@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import CreateProjectButton from "@/components/projects/CreateProjectButton";
 import ProjectCard from "@/components/projects/ProjectCard";
-import { getProjects, type Project } from "@/lib/projects";
-import { getProjectProgress } from "@/lib/tasks";
+import { getProjects, sortProjectsByUrgency, type Project } from "@/lib/projects";
+import { getAssignedTasks, getProjectProgress } from "@/lib/tasks";
 
 export const metadata: Metadata = {
   title: "Mes projets | Abricot",
@@ -11,7 +11,11 @@ export const metadata: Metadata = {
 export default async function ProjectsPage() {
   let projects: Project[];
   try {
-    projects = await getProjects();
+    const [allProjects, assignedTasks] = await Promise.all([
+      getProjects(),
+      getAssignedTasks().catch(() => []),
+    ]);
+    projects = sortProjectsByUrgency(allProjects, assignedTasks);
   } catch (error) {
     const message =
       error instanceof Error && error.message !== "fetch failed"

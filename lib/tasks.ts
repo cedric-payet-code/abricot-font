@@ -43,8 +43,20 @@ const PRIORITY_ORDER: Record<TaskPriority, number> = {
   LOW: 3,
 };
 
+function dueTime(task: Task) {
+  return task.dueDate ? new Date(task.dueDate).getTime() : Number.POSITIVE_INFINITY;
+}
+
+export function compareByUrgency(a: Task, b: Task) {
+  return PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority] || dueTime(a) - dueTime(b);
+}
+
 export function sortByPriority(tasks: Task[]) {
-  return [...tasks].sort((a, b) => PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority]);
+  return [...tasks].sort(compareByUrgency);
+}
+
+export function isOpenTask(task: Task) {
+  return task.status !== "DONE" && task.status !== "CANCELLED";
 }
 
 export const getProjectTasks = cache(async (projectId: string): Promise<Task[]> => {
