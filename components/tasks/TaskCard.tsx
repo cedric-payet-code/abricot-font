@@ -1,4 +1,6 @@
-import { CalendarIcon, DotsIcon } from "@/components/icons/UiIcons";
+import { CalendarIcon } from "@/components/icons/UiIcons";
+import type { Member } from "@/components/tasks/AssigneeSelect";
+import EditTaskButton from "@/components/tasks/EditTaskButton";
 import Avatar from "@/components/ui/Avatar";
 import StatusBadge from "@/components/tasks/StatusBadge";
 import TaskComments from "@/components/tasks/TaskComments";
@@ -7,9 +9,11 @@ import type { Task } from "@/lib/tasks";
 
 type TaskCardProps = {
   task: Task;
+  projectId: string;
+  members: Member[];
 };
 
-export default function TaskCard({ task }: TaskCardProps) {
+export default function TaskCard({ task, projectId, members }: TaskCardProps) {
   const { title, description, status, dueDate, assignees = [], comments = [] } = task;
 
   return (
@@ -23,13 +27,7 @@ export default function TaskCard({ task }: TaskCardProps) {
           {description && <p className="text-body-s text-grey-600">{description}</p>}
         </div>
 
-        <button
-          type="button"
-          aria-label={`Actions pour la tâche ${title}`}
-          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[10px] border border-grey-200 bg-white text-grey-950 transition-colors hover:border-grey-400"
-        >
-          <DotsIcon />
-        </button>
+        <EditTaskButton projectId={projectId} task={task} members={members} />
       </div>
 
       <dl className="mt-6 flex flex-col gap-4 pb-6 text-body-xs">

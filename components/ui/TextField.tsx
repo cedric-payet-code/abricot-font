@@ -5,9 +5,17 @@ type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   hint?: string;
   error?: string;
+  requiredMark?: boolean;
 };
 
-export default function TextField({ id, label, hint, error, ...inputProps }: TextFieldProps) {
+export default function TextField({
+  id,
+  label,
+  hint,
+  error,
+  requiredMark = false,
+  ...inputProps
+}: TextFieldProps) {
   const hintId = hint ? `${id}-hint` : undefined;
   const errorId = error ? `${id}-error` : undefined;
   const describedBy = [hintId, errorId].filter(Boolean).join(" ") || undefined;
@@ -16,6 +24,7 @@ export default function TextField({ id, label, hint, error, ...inputProps }: Tex
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="text-body-s text-grey-950">
         {label}
+        {requiredMark && <span aria-hidden="true">*</span>}
       </label>
       <input
         id={id}

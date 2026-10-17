@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CalendarIcon, ChevronDownIcon, ListIcon } from "@/components/icons/UiIcons";
+import type { Member } from "@/components/tasks/AssigneeSelect";
 import ResultsAnnouncement from "@/components/tasks/ResultsAnnouncement";
 import TaskCard from "@/components/tasks/TaskCard";
 import SearchField from "@/components/ui/SearchField";
@@ -10,9 +11,11 @@ import type { Task, TaskStatus } from "@/lib/tasks";
 
 type ProjectTasksProps = {
   tasks: Task[] | null;
+  projectId: string;
+  members: Member[];
 };
 
-export default function ProjectTasks({ tasks }: ProjectTasksProps) {
+export default function ProjectTasks({ tasks, projectId, members }: ProjectTasksProps) {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<TaskStatus | "">("");
 
@@ -99,7 +102,7 @@ export default function ProjectTasks({ tasks }: ProjectTasksProps) {
               <ul className="flex flex-col gap-4">
                 {filteredTasks.map((task) => (
                   <li key={task.id}>
-                    <TaskCard task={task} />
+                    <TaskCard task={task} projectId={projectId} members={members} />
                   </li>
                 ))}
               </ul>

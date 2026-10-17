@@ -74,3 +74,11 @@ export function CommentIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function CloseIcon({ className }: IconProps) {
+  return (
+    <svg {...baseProps} className={className}>
+      <path d="M18 6 6 18M6 6l12 12" />
+    </svg>
+  );
+}

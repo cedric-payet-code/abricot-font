@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProjectContributors from "@/components/projects/ProjectContributors";
 import ProjectTasks from "@/components/projects/ProjectTasks";
+import CreateTaskButton from "@/components/tasks/CreateTaskButton";
 import { getProjects } from "@/lib/projects";
 import { getProjectTasks, sortByPriority } from "@/lib/tasks";
 
@@ -42,6 +43,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) notFound();
 
   const canEdit = project.userRole === "ADMIN";
+  const members = [
+    { id: project.owner.id, name: project.owner.name },
+    ...project.members.map(({ user }) => ({ id: user.id, name: user.name })),
+  ];
   const tasks = await getProjectTasks(id)
     .then(sortByPriority)
     .catch(() => null);
@@ -79,12 +84,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
 
         <div className="flex shrink-0 gap-3">
-          <button
-            type="button"
-            className="h-[50px] rounded-[10px] bg-grey-800 px-3 text-body-m text-white transition-colors hover:bg-grey-950"
-          >
-            Créer une tâche
-          </button>
+          <CreateTaskButton projectId={project.id} members={members} />
           <button
             type="button"
             className="flex h-[50px] items-center gap-2 rounded-[10px] bg-brand-dark px-6 text-body-m text-white"
@@ -97,7 +97,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       <ProjectContributors project={project} />
 
-      <ProjectTasks tasks={tasks} />
+      <ProjectTasks tasks={tasks} projectId={project.id} members={members} />
     </div>
   );
 }
