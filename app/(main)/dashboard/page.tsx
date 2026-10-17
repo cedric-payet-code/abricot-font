@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import AssignedTasks from "@/components/dashboard/AssignedTasks";
-import { CalendarIcon, ListIcon } from "@/components/icons/UiIcons";
+import DashboardTasks from "@/components/dashboard/DashboardTasks";
 import { getProjects } from "@/lib/projects";
 import { getAssignedTasks, sortByPriority } from "@/lib/tasks";
 import { getCurrentUser } from "@/lib/user";
@@ -39,26 +38,7 @@ export default async function DashboardPage() {
         </button>
       </div>
 
-      <div role="group" aria-label="Affichage des tâches" className="flex gap-2">
-        <button
-          type="button"
-          aria-pressed="true"
-          className="flex h-[45px] items-center gap-2 rounded-lg bg-brand-light px-4 text-body-s text-brand-dark"
-        >
-          <ListIcon className="text-brand-dark" />
-          Liste
-        </button>
-        <button
-          type="button"
-          aria-pressed="false"
-          className="flex h-[45px] items-center gap-2 rounded-lg bg-white px-4 text-body-s text-brand-dark transition-colors hover:bg-brand-light"
-        >
-          <CalendarIcon className="text-brand-dark" />
-          Kanban
-        </button>
-      </div>
-
-      <AssignedTasks tasks={tasks} projectNames={projectNames} />
+      <DashboardTasks tasks={tasks} projectNames={projectNames} />
     </div>
   );
 }
