@@ -127,3 +127,33 @@ export async function deleteTask(projectId: string, taskId: string): Promise<Del
   refreshPages(projectId);
   return { success: true };
 }
+
+export type CommentFormState = { success?: boolean; error?: string } | undefined;
+
+export async function addComment(
+  projectId: string,
+  taskId: string,
+  _prevState: CommentFormState,
+  formData: FormData
+): Promise<CommentFormState> {
+  const content = String(formData.get("content") ?? "").trim();
+  if (!content) return { error: "Le commentaire ne peut pas être vide." };
+
+  try {
+    const result = await api(`/projects/${projectId}/tasks/${taskId}/comments`, {
+      method: "POST",
+      body: JSON.stringify({ content }),
+    });
+    if (!result.success) {
+      return {
+        error:
+          result.data?.errors?.[0]?.message ?? result.message ?? "L'envoi du commentaire a échoué.",
+      };
+    }
+  } catch {
+    return { error: SERVER_ERROR };
+  }
+
+  refreshPages(projectId);
+  return { success: true };
+}

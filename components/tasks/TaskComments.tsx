@@ -1,13 +1,24 @@
 import { ChevronDownIcon } from "@/components/icons/UiIcons";
+import CommentForm from "@/components/tasks/CommentForm";
 import Avatar from "@/components/ui/Avatar";
 import { formatDateTime } from "@/lib/format";
 import type { TaskComment } from "@/lib/tasks";
 
 type TaskCommentsProps = {
   comments: TaskComment[];
+  projectId: string;
+  taskId: string;
+  taskTitle: string;
+  currentUserName?: string;
 };
 
-export default function TaskComments({ comments }: TaskCommentsProps) {
+export default function TaskComments({
+  comments,
+  projectId,
+  taskId,
+  taskTitle,
+  currentUserName,
+}: TaskCommentsProps) {
   return (
     <details className="group border-t border-grey-200">
       <summary className="flex cursor-pointer list-none items-center justify-between py-5 text-body-s text-grey-950 [&::-webkit-details-marker]:hidden">
@@ -39,6 +50,13 @@ export default function TaskComments({ comments }: TaskCommentsProps) {
             ))}
           </ul>
         )}
+
+        <CommentForm
+          projectId={projectId}
+          taskId={taskId}
+          taskTitle={taskTitle}
+          currentUserName={currentUserName}
+        />
       </div>
     </details>
   );

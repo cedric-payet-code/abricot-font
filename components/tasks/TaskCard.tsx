@@ -10,10 +10,11 @@ import type { Task } from "@/lib/tasks";
 type TaskCardProps = {
   task: Task;
   projectId: string;
+  currentUserName?: string;
   members: Member[];
 };
 
-export default function TaskCard({ task, projectId, members }: TaskCardProps) {
+export default function TaskCard({ task, projectId, members, currentUserName }: TaskCardProps) {
   const { title, description, status, dueDate, assignees = [], comments = [] } = task;
 
   return (
@@ -62,7 +63,13 @@ export default function TaskCard({ task, projectId, members }: TaskCardProps) {
         </div>
       </dl>
 
-      <TaskComments comments={comments} />
+      <TaskComments
+        comments={comments}
+        projectId={projectId}
+        taskId={task.id}
+        taskTitle={title}
+        currentUserName={currentUserName}
+      />
     </article>
   );
 }

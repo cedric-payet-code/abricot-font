@@ -105,7 +105,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       <ProjectContributors project={project} />
 
-      <ProjectTasks tasks={tasks} projectId={project.id} members={members} />
+      <ProjectTasks
+        tasks={tasks}
+        projectId={project.id}
+        members={members}
+        currentUserName={currentUser?.name}
+      />
     </div>
   );
 }

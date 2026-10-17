@@ -12,10 +12,16 @@ import type { Task, TaskStatus } from "@/lib/tasks";
 type ProjectTasksProps = {
   tasks: Task[] | null;
   projectId: string;
+  currentUserName?: string;
   members: Member[];
 };
 
-export default function ProjectTasks({ tasks, projectId, members }: ProjectTasksProps) {
+export default function ProjectTasks({
+  tasks,
+  projectId,
+  members,
+  currentUserName,
+}: ProjectTasksProps) {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<TaskStatus | "">("");
 
@@ -102,7 +108,12 @@ export default function ProjectTasks({ tasks, projectId, members }: ProjectTasks
               <ul className="flex flex-col gap-4">
                 {filteredTasks.map((task) => (
                   <li key={task.id}>
-                    <TaskCard task={task} projectId={projectId} members={members} />
+                    <TaskCard
+                      task={task}
+                      projectId={projectId}
+                      members={members}
+                      currentUserName={currentUserName}
+                    />
                   </li>
                 ))}
               </ul>
