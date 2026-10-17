@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CreateProjectButton from "@/components/projects/CreateProjectButton";
 import DashboardTasks from "@/components/dashboard/DashboardTasks";
 import { getProjects } from "@/lib/projects";
 import { getAssignedTasks, sortByPriority } from "@/lib/tasks";
@@ -30,12 +31,7 @@ export default async function DashboardPage() {
             </p>
           )}
         </div>
-        <button
-          type="button"
-          className="h-[50px] self-start rounded-[10px] bg-grey-800 px-7 text-body-m text-white transition-colors hover:bg-grey-950 sm:self-auto"
-        >
-          + Créer un projet
-        </button>
+        <CreateProjectButton />
       </div>
 
       <DashboardTasks tasks={tasks} projectNames={projectNames} />

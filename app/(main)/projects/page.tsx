@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CreateProjectButton from "@/components/projects/CreateProjectButton";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { getProjects, type Project } from "@/lib/projects";
 import { getProjectProgress } from "@/lib/tasks";
@@ -32,12 +33,7 @@ export default async function ProjectsPage() {
           <h1 className="text-h4 text-grey-950">Mes projets</h1>
           <p className="text-body-l text-grey-950">Gérez vos projets</p>
         </div>
-        <button
-          type="button"
-          className="h-[50px] self-start rounded-[10px] bg-grey-800 px-7 text-body-m text-white transition-colors hover:bg-grey-950 sm:self-auto"
-        >
-          + Créer un projet
-        </button>
+        <CreateProjectButton />
       </div>
 
       {projects.length === 0 ? (

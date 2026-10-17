@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import EditProjectButton from "@/components/projects/EditProjectButton";
 import ProjectContributors from "@/components/projects/ProjectContributors";
 import ProjectTasks from "@/components/projects/ProjectTasks";
 import CreateTaskButton from "@/components/tasks/CreateTaskButton";
@@ -69,12 +70,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
               <h1 className="text-h4 text-grey-950">{project.name}</h1>
               {canEdit && (
-                <button
-                  type="button"
-                  className="text-body-s text-brand-dark underline underline-offset-2 hover:text-grey-950"
-                >
-                  Modifier
-                </button>
+                <EditProjectButton
+                  project={{
+                    id: project.id,
+                    name: project.name,
+                    description: project.description,
+                  }}
+                />
               )}
             </div>
             {project.description && (
