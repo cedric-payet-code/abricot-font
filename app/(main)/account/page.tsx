@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { logout } from "@/app/(auth)/actions";
-import TextField from "@/components/ui/TextField";
+import AccountForm from "@/components/account/AccountForm";
 import { getCurrentUser } from "@/lib/user";
 
 export const metadata: Metadata = {
@@ -45,37 +45,7 @@ export default async function AccountPage() {
       </h1>
       <p className="mt-2 text-body-m text-grey-600">{user.name}</p>
 
-      <form noValidate className="mt-10 flex flex-col gap-8">
-        <TextField
-          id="lastName"
-          label="Nom"
-          type="text"
-          autoComplete="family-name"
-          defaultValue={lastName}
-        />
-        <TextField
-          id="firstName"
-          label="Prénom"
-          type="text"
-          autoComplete="given-name"
-          defaultValue={firstName}
-        />
-        <TextField
-          id="email"
-          label="Email"
-          type="email"
-          autoComplete="email"
-          defaultValue={user.email}
-        />
-        <TextField id="password" label="Mot de passe" type="password" autoComplete="new-password" />
-
-        <button
-          type="button"
-          className="mt-2 h-[50px] self-start rounded-[10px] bg-grey-800 px-7 text-body-m text-white transition-colors hover:bg-grey-950"
-        >
-          Modifier les informations
-        </button>
-      </form>
+      <AccountForm firstName={firstName} lastName={lastName} email={user.email} />
     </section>
   );
 }
