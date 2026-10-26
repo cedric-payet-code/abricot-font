@@ -16,7 +16,7 @@ export default function ProjectContributors({ project }: ProjectContributorsProp
     >
       <h2 id="contributors-title" className="text-h5 text-grey-800">
         Contributeurs{" "}
-        <span className="text-body-m text-grey-600">
+        <span className="text-body-m text-grey-800">
           {teamSize} {teamSize > 1 ? "personnes" : "personne"}
         </span>
       </h2>
@@ -26,7 +26,7 @@ export default function ProjectContributors({ project }: ProjectContributorsProp
           <Avatar name={owner.name} highlighted />
           <span
             title={owner.name}
-            className="rounded-[10px] bg-brand-light px-4 py-0.5 text-body-s text-brand-dark"
+            className="rounded-[10px] bg-brand-light px-4 py-0.5 text-body-s text-brand-text"
           >
             Propriétaire
           </span>

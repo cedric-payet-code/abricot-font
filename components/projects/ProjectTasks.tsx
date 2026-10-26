@@ -46,17 +46,17 @@ export default function ProjectTasks({
             <button
               type="button"
               aria-pressed="true"
-              className="flex h-[45px] items-center gap-2 rounded-lg bg-brand-light px-4 text-body-s text-brand-dark"
+              className="flex h-[45px] items-center gap-2 rounded-lg bg-brand-light px-4 text-body-s text-brand-text"
             >
-              <ListIcon className="text-brand-dark" />
+              <ListIcon className="text-brand-text" />
               Liste
             </button>
             <button
               type="button"
               aria-pressed="false"
-              className="flex h-[45px] items-center gap-2 rounded-lg px-4 text-body-s text-brand-dark transition-colors hover:bg-brand-light"
+              className="flex h-[45px] items-center gap-2 rounded-lg px-4 text-body-s text-brand-text transition-colors hover:bg-brand-light"
             >
-              <CalendarIcon className="text-brand-dark" />
+              <CalendarIcon className="text-brand-text" />
               Calendrier
             </button>
           </div>

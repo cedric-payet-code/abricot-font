@@ -31,11 +31,11 @@ export default function DashboardTasks({ tasks }: DashboardTasksProps) {
               type="button"
               aria-pressed={isActive}
               onClick={() => setView(value)}
-              className={`flex h-[45px] items-center gap-2 rounded-lg px-4 text-body-s text-brand-dark transition-colors ${
+              className={`flex h-[45px] items-center gap-2 rounded-lg px-4 text-body-s text-brand-text transition-colors ${
                 isActive ? "bg-brand-light" : "bg-white hover:bg-brand-light"
               }`}
             >
-              <Icon className="text-brand-dark" />
+              <Icon className="text-brand-text" />
               {label}
             </button>
           );

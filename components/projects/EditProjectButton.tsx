@@ -24,7 +24,7 @@ export default function EditProjectButton({ project }: EditProjectButtonProps) {
         type="button"
         aria-haspopup="dialog"
         onClick={() => setOpen(true)}
-        className="text-body-s text-brand-dark underline underline-offset-2 hover:text-grey-950"
+        className="text-body-s text-brand-text underline underline-offset-2 hover:text-grey-950"
       >
         Modifier
       </button>

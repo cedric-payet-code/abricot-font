@@ -20,7 +20,7 @@ export default function DeleteProjectButton({ project, fromDashboard }: DeletePr
         type="button"
         aria-haspopup="dialog"
         onClick={() => setOpen(true)}
-        className="flex h-[50px] items-center rounded-[10px] border border-brand-dark bg-white px-6 text-body-m text-brand-dark transition-colors hover:bg-brand-dark hover:text-white"
+        className="flex h-[50px] items-center rounded-[10px] border border-brand-text bg-white px-6 text-body-m text-brand-text transition-colors hover:bg-brand-text hover:text-white"
       >
         Supprimer
       </button>

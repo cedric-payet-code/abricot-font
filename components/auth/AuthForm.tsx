@@ -28,7 +28,7 @@ export default function AuthForm({
   return (
     <>
       <div className="my-auto flex flex-col gap-8 py-8">
-        <h1 className="text-center text-h1 font-medium text-brand-dark">{title}</h1>
+        <h1 className="text-center text-h1 font-medium text-brand-text">{title}</h1>
 
         <form action={action} noValidate className="flex flex-col gap-6">
           {children}
@@ -56,7 +56,7 @@ export default function AuthForm({
         {footerText}{" "}
         <Link
           href={footerLinkHref}
-          className="ml-2.5 text-brand-dark underline underline-offset-2 hover:text-grey-950"
+          className="ml-2.5 text-brand-text underline underline-offset-2 hover:text-grey-950"
         >
           {footerLinkLabel}
         </Link>

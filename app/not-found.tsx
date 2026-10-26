@@ -1,18 +1,22 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Footer from "@/components/layout/Footer";
+import NotFoundCard from "@/components/layout/NotFoundCard";
+
+export const metadata: Metadata = {
+  title: "Page introuvable | Abricot",
+};
 
 export default function NotFound() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-6 px-6 text-center">
-      <h1 className="text-h2">Page introuvable</h1>
-      <p className="text-body-m text-grey-600">
-        La page que vous cherchez n&apos;existe pas ou a été déplacée.
-      </p>
-      <Link
-        href="/dashboard"
-        className="rounded-lg bg-grey-800 px-6 py-3 text-white transition-colors hover:bg-grey-950"
-      >
-        Retour au tableau de bord
-      </Link>
-    </main>
+    <div className="flex min-h-screen flex-col">
+      <header className="flex justify-center bg-white px-6 py-8">
+        <Image src="/logo-orange.svg" alt="Abricot" width={147} height={19} priority />
+      </header>
+      <main className="flex w-full flex-1 items-center px-6 py-12">
+        <NotFoundCard />
+      </main>
+      <Footer />
+    </div>
   );
 }

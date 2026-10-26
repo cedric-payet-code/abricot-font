@@ -44,12 +44,12 @@ export default function Header({ initials }: HeaderProps) {
                   className={`group flex items-center gap-3 rounded-lg p-3 transition-colors duration-300 md:px-10 md:py-4 ${
                     isActive
                       ? "bg-grey-950 text-white"
-                      : "text-brand-dark hover:bg-grey-950 hover:text-white"
+                      : "text-brand-text hover:bg-grey-950 hover:text-white"
                   }`}
                 >
                   <Icon
                     className={`transition-colors duration-300 ${
-                      isActive ? "" : "text-brand-dark group-hover:text-white"
+                      isActive ? "" : "text-brand-text group-hover:text-white"
                     }`}
                   />
                   <span className="sr-only md:not-sr-only">{label}</span>
@@ -66,8 +66,8 @@ export default function Header({ initials }: HeaderProps) {
         aria-current={isAccountPage ? "page" : undefined}
         className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full md:h-16 md:w-16 text-body-s transition-colors duration-300 ${
           isAccountPage
-            ? "bg-brand-dark text-white"
-            : "bg-brand-light text-grey-950 hover:text-white hover:bg-brand-dark"
+            ? "bg-brand-text text-white"
+            : "bg-brand-light text-grey-950 hover:text-white hover:bg-brand-text"
         }`}
       >
         {initials}

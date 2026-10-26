@@ -69,7 +69,7 @@ export default function EditTaskButton({ projectId, task, members }: EditTaskBut
               <button
                 type="button"
                 onClick={() => setConfirmingDelete(true)}
-                className="flex h-[50px] items-center rounded-[10px] border border-brand-dark bg-white px-6 text-body-m text-brand-dark transition-colors hover:bg-brand-dark hover:text-white"
+                className="flex h-[50px] items-center rounded-[10px] border border-brand-text bg-white px-6 text-body-m text-brand-text transition-colors hover:bg-brand-text hover:text-white"
               >
                 Supprimer la tâche
               </button>

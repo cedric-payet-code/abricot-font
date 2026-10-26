@@ -18,7 +18,7 @@ type ProjectPageProps = {
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { id } = await params;
   const project = await getProject(id).catch(() => null);
-  return { title: `${project?.name ?? "Projet"} | Abricot` };
+  return { title: `${project?.name ?? "Page introuvable"} | Abricot` };
 }
 
 export default async function ProjectPage({ params, searchParams }: ProjectPageProps) {
@@ -91,7 +91,7 @@ export default async function ProjectPage({ params, searchParams }: ProjectPageP
           <CreateTaskButton projectId={project.id} members={members} />
           <button
             type="button"
-            className="flex h-[50px] items-center gap-2 rounded-[10px] bg-brand-dark px-6 text-body-m text-white"
+            className="flex h-[50px] items-center gap-2 rounded-[10px] bg-brand-text px-6 text-body-m text-white"
           >
             <span aria-hidden="true">✦</span>
             IA

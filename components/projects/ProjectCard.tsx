@@ -33,7 +33,7 @@ export default function ProjectCard({ project, progress }: ProjectCardProps) {
                 <Avatar name={owner.name} highlighted />
                 <span
                   title={owner.name}
-                  className="rounded-[10px] bg-brand-light px-4 py-0.5 text-body-s text-brand-dark"
+                  className="rounded-[10px] bg-brand-light px-4 py-0.5 text-body-s text-brand-text"
                 >
                   Propriétaire
                 </span>
