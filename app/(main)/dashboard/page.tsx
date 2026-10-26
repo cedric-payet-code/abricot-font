@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import CreateProjectButton from "@/components/projects/CreateProjectButton";
 import DashboardTasks from "@/components/dashboard/DashboardTasks";
-import { getProjects } from "@/lib/projects";
 import { getAssignedTasks, sortByPriority } from "@/lib/tasks";
 import { getCurrentUser } from "@/lib/user";
 
@@ -10,15 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default async function DashboardPage() {
-  const [user, tasks, projects] = await Promise.all([
+  const [user, tasks] = await Promise.all([
     getCurrentUser(),
     getAssignedTasks()
       .then(sortByPriority)
       .catch(() => null),
-    getProjects().catch(() => []),
   ]);
-
-  const projectNames = Object.fromEntries(projects.map((project) => [project.id, project.name]));
 
   return (
     <div className="flex flex-col gap-10">
@@ -31,10 +27,10 @@ export default async function DashboardPage() {
             </p>
           )}
         </div>
-        <CreateProjectButton />
+        <CreateProjectButton fromDashboard />
       </div>
 
-      <DashboardTasks tasks={tasks} projectNames={projectNames} />
+      <DashboardTasks tasks={tasks} />
     </div>
   );
 }

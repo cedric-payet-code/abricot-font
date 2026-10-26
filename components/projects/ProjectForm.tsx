@@ -12,6 +12,7 @@ type ProjectFormProps = {
     description?: string | null;
     contributors: UserSearchResult[];
   };
+  fromDashboard?: boolean;
   submitLabel: string;
   pendingLabel: string;
   onSuccess: () => void;
@@ -20,6 +21,7 @@ type ProjectFormProps = {
 export default function ProjectForm({
   action,
   project,
+  fromDashboard = false,
   submitLabel,
   pendingLabel,
   onSuccess,
@@ -49,6 +51,7 @@ export default function ProjectForm({
 
   return (
     <form action={formAction} noValidate className="flex flex-col gap-6">
+      {fromDashboard && <input type="hidden" name="from" value="dashboard" />}
       <TextField
         id={`${formId}-name`}
         name="name"

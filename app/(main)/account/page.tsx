@@ -19,7 +19,7 @@ export default async function AccountPage() {
     return (
       <div className="flex flex-col items-start gap-4">
         <p role="alert" className="text-body-m text-error-text">
-          Votre session a expiré. Veuillez vous reconnecter.
+          Impossible de récupérer vos informations. Réessayez plus tard ou reconnectez-vous.
         </p>
         <form action={logout}>
           <button
@@ -46,6 +46,15 @@ export default async function AccountPage() {
       <p className="mt-2 text-body-m text-grey-600">{user.name}</p>
 
       <AccountForm firstName={firstName} lastName={lastName} email={user.email} />
+
+      <form action={logout} className="mt-10 border-t border-grey-200 pt-8">
+        <button
+          type="submit"
+          className="h-[50px] rounded-[10px] border border-grey-200 bg-white px-7 text-body-m text-grey-950 transition-colors hover:border-grey-400"
+        >
+          Se déconnecter
+        </button>
+      </form>
     </section>
   );
 }

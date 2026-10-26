@@ -6,27 +6,24 @@ import EditProjectButton from "@/components/projects/EditProjectButton";
 import ProjectContributors from "@/components/projects/ProjectContributors";
 import ProjectTasks from "@/components/projects/ProjectTasks";
 import CreateTaskButton from "@/components/tasks/CreateTaskButton";
-import { getProjects } from "@/lib/projects";
+import { getProject } from "@/lib/projects";
 import { getProjectTasks, sortByPriority } from "@/lib/tasks";
 import { getCurrentUser } from "@/lib/user";
 
 type ProjectPageProps = {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ from?: string }>;
 };
-
-async function getProject(id: string) {
-  const projects = await getProjects();
-  return projects.find((project) => project.id === id);
-}
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { id } = await params;
-  const project = await getProject(id).catch(() => undefined);
+  const project = await getProject(id).catch(() => null);
   return { title: `${project?.name ?? "Projet"} | Abricot` };
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
+export default async function ProjectPage({ params, searchParams }: ProjectPageProps) {
   const { id } = await params;
+  const fromDashboard = (await searchParams).from === "dashboard";
 
   let project;
   try {
@@ -61,8 +58,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
         <div className="flex items-start gap-4 md:gap-5">
           <Link
-            href="/projects"
-            aria-label="Retour aux projets"
+            href={fromDashboard ? "/dashboard" : "/projects"}
+            aria-label={fromDashboard ? "Retour au tableau de bord" : "Retour aux projets"}
             className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[10px] border border-grey-200 bg-white text-grey-950 transition-colors hover:border-grey-400"
           >
             <span aria-hidden="true" className="text-h5">
@@ -99,7 +96,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <span aria-hidden="true">✦</span>
             IA
           </button>
-          {isOwner && <DeleteProjectButton project={{ id: project.id, name: project.name }} />}
+          {isOwner && (
+            <DeleteProjectButton
+              project={{ id: project.id, name: project.name }}
+              fromDashboard={fromDashboard}
+            />
+          )}
         </div>
       </div>
 

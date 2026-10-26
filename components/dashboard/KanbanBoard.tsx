@@ -3,7 +3,6 @@ import type { Task, TaskStatus } from "@/lib/tasks";
 
 type KanbanBoardProps = {
   tasks: Task[] | null;
-  projectNames: Record<string, string>;
 };
 
 const COLUMNS: { status: TaskStatus; title: string }[] = [
@@ -18,7 +17,7 @@ function isInMonth(dueDate: string | undefined, reference: Date) {
   return date.getFullYear() === reference.getFullYear() && date.getMonth() === reference.getMonth();
 }
 
-export default function KanbanBoard({ tasks, projectNames }: KanbanBoardProps) {
+export default function KanbanBoard({ tasks }: KanbanBoardProps) {
   if (tasks === null) {
     return (
       <p role="alert" className="text-body-m text-error-text">
@@ -59,7 +58,7 @@ export default function KanbanBoard({ tasks, projectNames }: KanbanBoardProps) {
                     <li key={task.id}>
                       <AssignedTaskCard
                         task={task}
-                        projectName={task.project?.name ?? projectNames[task.projectId]}
+                        projectName={task.project?.name}
                         layout="stacked"
                       />
                     </li>

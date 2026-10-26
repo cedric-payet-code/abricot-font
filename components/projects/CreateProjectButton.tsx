@@ -5,7 +5,11 @@ import { createProject } from "@/app/(main)/projects/actions";
 import ProjectForm from "@/components/projects/ProjectForm";
 import Modal from "@/components/ui/Modal";
 
-export default function CreateProjectButton() {
+type CreateProjectButtonProps = {
+  fromDashboard?: boolean;
+};
+
+export default function CreateProjectButton({ fromDashboard = false }: CreateProjectButtonProps) {
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
 
@@ -23,6 +27,7 @@ export default function CreateProjectButton() {
       <Modal open={open} onClose={close} title="Créer un projet">
         <ProjectForm
           action={createProject}
+          fromDashboard={fromDashboard}
           submitLabel="Ajouter un projet"
           pendingLabel="Création…"
           onSuccess={close}

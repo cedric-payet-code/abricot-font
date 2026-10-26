@@ -69,10 +69,15 @@ export async function createTask(
     }
 
     if (status !== "TODO") {
-      await api(`/projects/${projectId}/tasks/${result.data.task.id}`, {
+      const taskId = result.data.task.id;
+      const statusUpdate = await api(`/projects/${projectId}/tasks/${taskId}`, {
         method: "PUT",
         body: JSON.stringify({ status }),
       });
+      if (!statusUpdate.success) {
+        await api(`/projects/${projectId}/tasks/${taskId}`, { method: "DELETE" });
+        return { error: "La tâche n'a pas pu être créée avec ce statut. Réessayez." };
+      }
     }
   } catch {
     return { error: SERVER_ERROR };

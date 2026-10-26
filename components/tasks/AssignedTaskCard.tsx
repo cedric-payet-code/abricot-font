@@ -60,7 +60,7 @@ export default function AssignedTaskCard({
         </ul>
 
         <Link
-          href={`/projects/${projectId}`}
+          href={`/projects/${projectId}?from=dashboard`}
           aria-label={`Voir la tâche ${title}`}
           className={`flex h-[50px] items-center justify-center rounded-[10px] bg-grey-800 px-12 text-body-m text-white transition-colors hover:bg-grey-950 ${
             layout === "row" ? "self-end" : "self-start"

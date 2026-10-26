@@ -39,7 +39,11 @@ export async function login(_prevState: AuthFormState, formData: FormData): Prom
   }
 
   if (!result.success) {
-    return { error: "Email ou mot de passe incorrect.", values };
+    const error =
+      result.error === "INVALID_CREDENTIALS"
+        ? "Email ou mot de passe incorrect."
+        : (result.message ?? SERVER_ERROR);
+    return { error, values };
   }
 
   await createSession(result.data.token);

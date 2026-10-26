@@ -29,7 +29,7 @@ export default function EditProjectButton({ project }: EditProjectButtonProps) {
         Modifier
       </button>
 
-      <Modal open={open} onClose={close} title="Modifier le projet">
+      <Modal open={open} onClose={close} title="Modifier un projet">
         <ProjectForm
           action={updateProject.bind(null, project.id)}
           project={project}

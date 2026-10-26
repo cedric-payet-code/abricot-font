@@ -1,10 +1,12 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getInitials } from "@/lib/format";
-import { getCurrentUser } from "@/lib/user";
+import { redirect } from "next/navigation";
+import { getSession } from "@/lib/user";
 
 export default async function MainLayout({ children }: { children: React.ReactNode }) {
-  const user = await getCurrentUser();
+  const { user, expired } = await getSession();
+  if (expired) redirect("/logout");
   const initials = user ? getInitials(user.name) : "";
 
   return (

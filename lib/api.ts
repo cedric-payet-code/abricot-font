@@ -1,6 +1,8 @@
 import { cookies } from "next/headers";
 import { SESSION_COOKIE } from "@/lib/session";
 
+export const SESSION_EXPIRED = "Authentication failed";
+
 export async function api(path: string, options: RequestInit = {}) {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
 
@@ -13,5 +15,14 @@ export async function api(path: string, options: RequestInit = {}) {
     cache: "no-store",
   });
 
-  return res.json();
+  try {
+    return { ...(await res.json()), status: res.status };
+  } catch {
+    return {
+      success: false,
+      status: res.status,
+      error: "SERVER_ERROR",
+      message: "Le serveur a rencontré une erreur. Réessayez plus tard.",
+    };
+  }
 }

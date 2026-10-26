@@ -75,7 +75,6 @@ export default function ProjectTasks({
               <option value="TODO">À faire</option>
               <option value="IN_PROGRESS">En cours</option>
               <option value="DONE">Terminée</option>
-              <option value="CANCELLED">Annulée</option>
             </select>
             <ChevronDownIcon className="pointer-events-none absolute top-1/2 right-6 -translate-y-1/2 text-grey-600" />
           </div>

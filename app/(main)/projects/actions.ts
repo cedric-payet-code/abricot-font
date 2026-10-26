@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { api } from "@/lib/api";
-import { getProjects } from "@/lib/projects";
+import { getProject } from "@/lib/projects";
 import { getCurrentUser } from "@/lib/user";
 
 export type ProjectFormState =
@@ -48,6 +48,7 @@ export async function createProject(
 ): Promise<ProjectFormState> {
   const { name, description } = readProjectForm(formData);
   const contributors = formData.getAll("contributors").map(String);
+  const fromDashboard = formData.get("from") === "dashboard";
 
   const invalid = validate({ name, description });
   if (invalid) return invalid;
@@ -73,7 +74,8 @@ export async function createProject(
 
   revalidatePath("/projects");
   revalidatePath("/dashboard");
-  redirect(projectId ? `/projects/${projectId}` : "/projects");
+  if (!projectId) redirect(fromDashboard ? "/dashboard" : "/projects");
+  redirect(`/projects/${projectId}${fromDashboard ? "?from=dashboard" : ""}`);
 }
 
 export async function updateProject(
@@ -102,7 +104,7 @@ export async function updateProject(
       };
     }
 
-    const project = (await getProjects()).find((item) => item.id === projectId);
+    const project = await getProject(projectId);
     const currentMembers = project?.members.map(({ user }) => user) ?? [];
     const currentEmails = currentMembers.map((user) => user.email.toLowerCase());
 
@@ -139,7 +141,10 @@ export async function updateProject(
   return { success: true };
 }
 
-export async function deleteProject(projectId: string): Promise<{ error?: string }> {
+export async function deleteProject(
+  projectId: string,
+  fromDashboard: boolean
+): Promise<{ error?: string }> {
   try {
     const result = await api(`/projects/${projectId}`, { method: "DELETE" });
     if (!result.success) {
@@ -151,7 +156,7 @@ export async function deleteProject(projectId: string): Promise<{ error?: string
 
   revalidatePath("/projects");
   revalidatePath("/dashboard");
-  redirect("/projects");
+  redirect(fromDashboard ? "/dashboard" : "/projects");
 }
 
 export async function searchUsers(query: string): Promise<UserSearchResult[]> {

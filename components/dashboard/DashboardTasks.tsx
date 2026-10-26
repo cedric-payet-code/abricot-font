@@ -10,7 +10,6 @@ type View = "list" | "kanban";
 
 type DashboardTasksProps = {
   tasks: Task[] | null;
-  projectNames: Record<string, string>;
 };
 
 const VIEWS = [
@@ -18,7 +17,7 @@ const VIEWS = [
   { value: "kanban", label: "Kanban", Icon: CalendarIcon },
 ] as const;
 
-export default function DashboardTasks({ tasks, projectNames }: DashboardTasksProps) {
+export default function DashboardTasks({ tasks }: DashboardTasksProps) {
   const [view, setView] = useState<View>("list");
 
   return (
@@ -43,11 +42,7 @@ export default function DashboardTasks({ tasks, projectNames }: DashboardTasksPr
         })}
       </div>
 
-      {view === "list" ? (
-        <AssignedTasks tasks={tasks} projectNames={projectNames} />
-      ) : (
-        <KanbanBoard tasks={tasks} projectNames={projectNames} />
-      )}
+      {view === "list" ? <AssignedTasks tasks={tasks} /> : <KanbanBoard tasks={tasks} />}
     </>
   );
 }

@@ -23,7 +23,7 @@ export default function AccountForm(initialValues: AccountFormProps) {
   async function submit(previousState: AccountFormState, formData: FormData) {
     const result = await updateAccount(previousState, formData);
     if (!result?.fieldErrors?.currentPassword) setConfirmOpen(false);
-    if (result?.success) setNewPassword("");
+    if (result?.success || result?.passwordChanged) setNewPassword("");
     return result;
   }
 

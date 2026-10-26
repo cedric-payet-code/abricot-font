@@ -7,9 +7,10 @@ import Modal from "@/components/ui/Modal";
 
 type DeleteProjectButtonProps = {
   project: { id: string; name: string };
+  fromDashboard: boolean;
 };
 
-export default function DeleteProjectButton({ project }: DeleteProjectButtonProps) {
+export default function DeleteProjectButton({ project, fromDashboard }: DeleteProjectButtonProps) {
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
 
@@ -26,7 +27,7 @@ export default function DeleteProjectButton({ project }: DeleteProjectButtonProp
 
       <Modal open={open} onClose={close} title="Supprimer le projet">
         <ConfirmDelete
-          action={deleteProject.bind(null, project.id)}
+          action={deleteProject.bind(null, project.id, fromDashboard)}
           message={
             <>
               <p>

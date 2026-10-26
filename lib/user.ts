@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { api } from "@/lib/api";
+import { api, SESSION_EXPIRED } from "@/lib/api";
 
 export type User = {
   id: string;
@@ -9,12 +9,23 @@ export type User = {
   updatedAt: string;
 };
 
-export const getCurrentUser = cache(async (): Promise<User | null> => {
+type Session = {
+  user: User | null;
+  expired: boolean;
+};
+
+export const getSession = cache(async (): Promise<Session> => {
   try {
     const result = await api("/auth/profile");
-    if (!result.success) return null;
-    return result.data?.user ?? result.data ?? null;
+    if (result.success) {
+      return { user: result.data?.user ?? result.data ?? null, expired: false };
+    }
+    return { user: null, expired: result.error === SESSION_EXPIRED };
   } catch {
-    return null;
+    return { user: null, expired: false };
   }
+});
+
+export const getCurrentUser = cache(async (): Promise<User | null> => {
+  return (await getSession()).user;
 });

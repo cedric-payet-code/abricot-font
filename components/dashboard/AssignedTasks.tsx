@@ -9,10 +9,9 @@ import type { Task } from "@/lib/tasks";
 
 type AssignedTasksProps = {
   tasks: Task[] | null;
-  projectNames: Record<string, string>;
 };
 
-export default function AssignedTasks({ tasks, projectNames }: AssignedTasksProps) {
+export default function AssignedTasks({ tasks }: AssignedTasksProps) {
   const [search, setSearch] = useState("");
 
   const filteredTasks = filterTasks(tasks ?? [], { search });
@@ -58,10 +57,7 @@ export default function AssignedTasks({ tasks, projectNames }: AssignedTasksProp
               <ul className="flex flex-col gap-4">
                 {filteredTasks.map((task) => (
                   <li key={task.id}>
-                    <AssignedTaskCard
-                      task={task}
-                      projectName={task.project?.name ?? projectNames[task.projectId]}
-                    />
+                    <AssignedTaskCard task={task} projectName={task.project?.name} />
                   </li>
                 ))}
               </ul>

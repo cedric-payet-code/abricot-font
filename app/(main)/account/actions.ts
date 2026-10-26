@@ -9,6 +9,7 @@ export type AccountFormState =
   | {
       success?: string;
       error?: string;
+      passwordChanged?: boolean;
       fieldErrors?: Record<string, string>;
     }
   | undefined;
@@ -58,6 +59,8 @@ export async function updateAccount(
     return { error: "Aucune modification à enregistrer." };
   }
 
+  let passwordChanged = false;
+
   try {
     if (newPassword) {
       const result = await api("/auth/password", {
@@ -76,6 +79,7 @@ export async function updateAccount(
           fieldErrors: toFieldErrors(result.data?.errors),
         };
       }
+      passwordChanged = true;
     }
 
     if (profileChanged) {
@@ -84,14 +88,15 @@ export async function updateAccount(
         body: JSON.stringify({ name, email }),
       });
       if (!result.success) {
+        const error = passwordChanged
+          ? "Votre mot de passe a été modifié, mais pas vos informations."
+          : "Vos informations n'ont pas été modifiées.";
         if (result.error === "EMAIL_ALREADY_EXISTS") {
-          return {
-            error: "Vos informations n'ont pas été modifiées.",
-            fieldErrors: { email: "Cet email est déjà utilisé." },
-          };
+          return { error, passwordChanged, fieldErrors: { email: "Cet email est déjà utilisé." } };
         }
         return {
-          error: result.message ?? "La modification des informations a échoué.",
+          error: passwordChanged ? error : (result.message ?? error),
+          passwordChanged,
           fieldErrors: toFieldErrors(result.data?.errors),
         };
       }
