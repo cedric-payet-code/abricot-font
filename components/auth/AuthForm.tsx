@@ -45,7 +45,7 @@ export default function AuthForm({
           <button
             type="submit"
             disabled={pending}
-            className="mt-2 h-[50px] self-center rounded-[10px] bg-grey-800 px-18 text-body-m text-white transition-colors hover:bg-grey-950 disabled:cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-600"
+            className="mt-2 h-[50px] self-center rounded-[10px] bg-grey-800 px-18 text-body-m text-white transition-colors hover:bg-grey-950 disabled:cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-400"
           >
             {pending ? pendingLabel : submitLabel}
           </button>

@@ -21,7 +21,7 @@ export default function TaskComments({
 }: TaskCommentsProps) {
   return (
     <details className="group border-t border-grey-200">
-      <summary className="flex cursor-pointer list-none items-center justify-between py-5 text-body-s text-grey-950 [&::-webkit-details-marker]:hidden">
+      <summary className="flex cursor-pointer list-none items-center justify-between py-5 text-body-s text-grey-800 [&::-webkit-details-marker]:hidden">
         Commentaires ({comments.length})
         <ChevronDownIcon className="text-grey-950 transition-transform group-open:rotate-180" />
       </summary>

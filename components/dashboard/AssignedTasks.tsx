@@ -25,7 +25,7 @@ export default function AssignedTasks({ tasks, projectNames }: AssignedTasksProp
     >
       <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-2">
-          <h2 id="assigned-tasks-title" className="text-h5 text-grey-950">
+          <h2 id="assigned-tasks-title" className="text-h5 text-grey-800">
             Mes tâches assignées
           </h2>
           <p className="text-body-m text-grey-600">Par ordre de priorité</p>

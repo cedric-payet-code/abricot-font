@@ -72,7 +72,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
           <div className="flex flex-col gap-3">
             <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-              <h1 className="text-h4 text-grey-950">{project.name}</h1>
+              <h1 className="text-h4 text-grey-800">{project.name}</h1>
               {canEdit && (
                 <EditProjectButton
                   project={{

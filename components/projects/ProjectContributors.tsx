@@ -14,7 +14,7 @@ export default function ProjectContributors({ project }: ProjectContributorsProp
       aria-labelledby="contributors-title"
       className="flex flex-col gap-4 rounded-[10px] bg-grey-100 px-6 py-5 md:flex-row md:items-center md:justify-between md:px-12"
     >
-      <h2 id="contributors-title" className="text-h5 text-grey-950">
+      <h2 id="contributors-title" className="text-h5 text-grey-800">
         Contributeurs{" "}
         <span className="text-body-m text-grey-600">
           {teamSize} {teamSize > 1 ? "personnes" : "personne"}

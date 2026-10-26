@@ -105,7 +105,7 @@ export default function AccountForm(initialValues: AccountFormProps) {
       <button
         type="submit"
         disabled={pending}
-        className="h-[50px] self-start rounded-[10px] bg-grey-800 px-7 text-body-m text-white transition-colors hover:bg-grey-950 disabled:cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-600"
+        className="h-[50px] self-start rounded-[10px] bg-grey-800 px-7 text-body-m text-white transition-colors hover:bg-grey-950 disabled:cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-400"
       >
         {pending && !confirmOpen ? "Enregistrement…" : "Modifier les informations"}
       </button>
@@ -130,7 +130,7 @@ export default function AccountForm(initialValues: AccountFormProps) {
             <button
               type="submit"
               disabled={pending}
-              className="h-[50px] rounded-[10px] bg-grey-800 px-7 text-body-m text-white transition-colors hover:bg-grey-950 disabled:cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-600"
+              className="h-[50px] rounded-[10px] bg-grey-800 px-7 text-body-m text-white transition-colors hover:bg-grey-950 disabled:cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-400"
             >
               {pending ? "Enregistrement…" : "Confirmer"}
             </button>

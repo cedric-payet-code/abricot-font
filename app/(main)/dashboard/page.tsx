@@ -24,7 +24,7 @@ export default async function DashboardPage() {
     <div className="flex flex-col gap-10">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col gap-3">
-          <h1 className="text-h4 text-grey-950">Tableau de bord</h1>
+          <h1 className="text-h4 text-grey-800">Tableau de bord</h1>
           {user && (
             <p className="text-body-l text-grey-950">
               Bonjour {user.name}, voici un aperçu de vos projets et tâches

@@ -115,7 +115,7 @@ export default function TaskForm({
       <button
         type="submit"
         disabled={!canSubmit}
-        className="mt-6 h-[50px] self-start rounded-[10px] bg-grey-800 px-6 text-body-m text-white transition-colors hover:bg-grey-950 disabled:cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-600"
+        className="mt-6 h-[50px] self-start rounded-[10px] bg-grey-800 px-6 text-body-m text-white transition-colors hover:bg-grey-950 disabled:cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-400"
       >
         {pending ? pendingLabel : submitLabel}
       </button>

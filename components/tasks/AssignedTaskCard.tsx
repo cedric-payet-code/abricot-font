@@ -40,7 +40,7 @@ export default function AssignedTaskCard({
         <ul className="flex min-w-0 items-center gap-2 text-body-xs whitespace-nowrap text-grey-600">
           {projectName && (
             <li className="flex min-w-0 items-center gap-1.5" title={projectName}>
-              <FolderIcon className="h-4 w-4 shrink-0" />
+              <FolderIcon className="h-4 w-4 shrink-0 text-grey-400" />
               <span className="sr-only">Projet :</span>
               <span className="truncate">{projectName}</span>
             </li>

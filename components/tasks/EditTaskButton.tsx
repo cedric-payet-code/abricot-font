@@ -32,7 +32,7 @@ export default function EditTaskButton({ projectId, task, members }: EditTaskBut
         aria-haspopup="dialog"
         aria-label={`Modifier la tâche ${task.title}`}
         onClick={() => setOpen(true)}
-        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[10px] border border-grey-200 bg-white text-grey-950 transition-colors hover:border-grey-400"
+        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[10px] border border-grey-200 bg-white text-grey-600 transition-colors hover:border-grey-400"
       >
         <DotsIcon />
       </button>

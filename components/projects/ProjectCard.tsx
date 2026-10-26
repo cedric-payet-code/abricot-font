@@ -19,7 +19,7 @@ export default function ProjectCard({ project, progress }: ProjectCardProps) {
         href={`/projects/${id}`}
         className="flex h-full flex-col gap-2 rounded-[10px] border border-grey-200 bg-white p-8 transition-colors hover:border-grey-400"
       >
-        <h2 className="text-h5 text-grey-950">{name}</h2>
+        <h2 className="text-h5 text-grey-800">{name}</h2>
         {description && <p className="text-body-s text-grey-600">{description}</p>}
 
         <div className="mt-auto flex flex-col gap-12 pt-10">

@@ -40,7 +40,7 @@ export default async function AccountPage() {
       aria-labelledby="account-title"
       className="rounded-[10px] border border-grey-200 bg-white px-6 py-10 md:px-[59px] md:pt-12"
     >
-      <h1 id="account-title" className="text-h5 font-medium text-grey-950">
+      <h1 id="account-title" className="text-h5 font-medium text-grey-800">
         Mon compte
       </h1>
       <p className="mt-2 text-body-m text-grey-600">{user.name}</p>

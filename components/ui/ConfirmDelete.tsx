@@ -39,7 +39,7 @@ export default function ConfirmDelete({
         <button
           type="submit"
           disabled={pending}
-          className="h-[50px] rounded-[10px] bg-error-text px-7 text-body-m text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-600"
+          className="h-[50px] rounded-[10px] bg-error-text px-7 text-body-m text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-400"
         >
           {pending ? "Suppression…" : confirmLabel}
         </button>

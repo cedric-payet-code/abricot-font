@@ -35,7 +35,7 @@ export default function ProjectTasks({
     >
       <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
         <div className="flex flex-col gap-2">
-          <h2 id="tasks-title" className="text-h5 text-grey-950">
+          <h2 id="tasks-title" className="text-h5 text-grey-800">
             Tâches
           </h2>
           <p className="text-body-m text-grey-600">Par ordre de priorité</p>

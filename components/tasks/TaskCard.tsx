@@ -35,7 +35,7 @@ export default function TaskCard({ task, projectId, members, currentUserName }: 
         {dueDate && (
           <div className="flex items-center gap-2">
             <dt className="text-grey-600">Échéance :</dt>
-            <dd className="flex items-center gap-1.5 text-grey-950">
+            <dd className="flex items-center gap-1.5 text-grey-800">
               <CalendarIcon className="h-4 w-4" />
               <time dateTime={dueDate}>{formatShortDate(dueDate)}</time>
             </dd>

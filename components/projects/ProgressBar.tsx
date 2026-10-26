@@ -13,7 +13,7 @@ export default function ProgressBar({ progress, label }: ProgressBarProps) {
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between text-body-xs text-grey-600">
         <span>Progression</span>
-        <span>{percent}%</span>
+        <span className="text-grey-800">{percent}%</span>
       </div>
       <div
         role="progressbar"

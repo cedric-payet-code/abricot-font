@@ -48,7 +48,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
           <CloseIcon />
         </button>
 
-        <h2 id={titleId} className="text-h4 text-grey-950">
+        <h2 id={titleId} className="text-h4 text-grey-800">
           {title}
         </h2>
 

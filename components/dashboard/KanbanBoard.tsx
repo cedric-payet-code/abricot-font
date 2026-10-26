@@ -41,9 +41,9 @@ export default function KanbanBoard({ tasks, projectNames }: KanbanBoardProps) {
             <section
               key={status}
               aria-labelledby={titleId}
-              className="flex flex-col gap-10 rounded-[10px] border border-brand-light bg-white px-6 py-10"
+              className="flex flex-col gap-10 rounded-[10px] border border-error-light bg-white px-6 py-10"
             >
-              <h2 id={titleId} className="flex items-center gap-2 text-h5 text-grey-950">
+              <h2 id={titleId} className="flex items-center gap-2 text-h5 text-grey-800">
                 {title}
                 <span className="rounded-full bg-grey-200 px-4 py-0.5 text-body-xs text-grey-800">
                   {columnTasks.length}
