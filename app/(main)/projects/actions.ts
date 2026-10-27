@@ -74,6 +74,7 @@ export async function createProject(
 
   revalidatePath("/projects");
   revalidatePath("/dashboard");
+  // redirect() doit rester hors du try/catch : il fonctionne en levant une exception
   if (!projectId) redirect(fromDashboard ? "/dashboard" : "/projects");
   redirect(`/projects/${projectId}${fromDashboard ? "?from=dashboard" : ""}`);
 }
@@ -104,6 +105,7 @@ export async function updateProject(
       };
     }
 
+    // Compare les contributeurs actuels et ceux du formulaire pour n'envoyer que les différences
     const project = await getProject(projectId);
     const currentMembers = project?.members.map(({ user }) => user) ?? [];
     const currentEmails = currentMembers.map((user) => user.email.toLowerCase());

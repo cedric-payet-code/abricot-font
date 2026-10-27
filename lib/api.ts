@@ -3,6 +3,7 @@ import { SESSION_COOKIE } from "@/lib/session";
 
 export const SESSION_EXPIRED = "Authentication failed";
 
+// Point d'entrée unique vers le back-end, côté serveur : ajoute le token et renvoie toujours un objet
 export async function api(path: string, options: RequestInit = {}) {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
 

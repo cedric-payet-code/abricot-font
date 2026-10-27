@@ -42,6 +42,7 @@ export default async function ProjectPage({ params, searchParams }: ProjectPageP
 
   if (!project) notFound();
 
+  // Droits alignés sur le back-end : ADMIN modifie, seul le propriétaire supprime
   const canEdit = project.userRole === "ADMIN";
   const currentUser = await getCurrentUser();
   const isOwner = currentUser?.id === project.owner.id;

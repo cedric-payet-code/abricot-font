@@ -59,6 +59,7 @@ export async function updateAccount(
     return { error: "Aucune modification à enregistrer." };
   }
 
+  // Deux routes distinctes : mot de passe puis profil
   let passwordChanged = false;
 
   try {

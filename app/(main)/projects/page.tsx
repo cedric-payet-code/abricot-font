@@ -28,6 +28,7 @@ export default async function ProjectsPage() {
     );
   }
 
+  // Pas de route de progression : une requête de tâches par projet, lancées en parallèle
   const progresses = await Promise.all(projects.map((project) => getProjectProgress(project.id)));
 
   return (

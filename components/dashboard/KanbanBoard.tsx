@@ -27,6 +27,7 @@ export default function KanbanBoard({ tasks }: KanbanBoardProps) {
   }
 
   const today = new Date();
+  // Le Kanban n'affiche que les tâches à échéance dans le mois en cours
   const monthTasks = tasks.filter((task) => isInMonth(task.dueDate, today));
 
   return (

@@ -30,7 +30,7 @@
 
   /* ===== Couleurs de texte accessibles (contraste AA ≥ 4,5:1) ===== */
   /* Versions assombries, à utiliser pour le TEXTE à la place des couleurs ci-dessus */
-  --color-brand-text: #b54a08; /* liens, onglets, textes orange */
+  --color-brand-text: #b54a08; /* textes orange et boutons pleins (contraste AA) */
   --color-success-text: #1e7a45; /* badge « Terminée » */
   --color-error-text: #b91c1c; /* badge « À faire », messages d'erreur */
   --color-info-text: #1d4ed8;

@@ -47,6 +47,7 @@ function dueTime(task: Task) {
   return task.dueDate ? new Date(task.dueDate).getTime() : Number.POSITIVE_INFINITY;
 }
 
+// Priorité d'abord, puis échéance la plus proche
 export function compareByUrgency(a: Task, b: Task) {
   return PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority] || dueTime(a) - dueTime(b);
 }

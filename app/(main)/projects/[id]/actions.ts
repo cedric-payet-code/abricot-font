@@ -68,6 +68,7 @@ export async function createTask(
       };
     }
 
+    // Le back-end ignore le statut à la création : on le met à jour ensuite, et on annule si ça échoue
     if (status !== "TODO") {
       const taskId = result.data.task.id;
       const statusUpdate = await api(`/projects/${projectId}/tasks/${taskId}`, {

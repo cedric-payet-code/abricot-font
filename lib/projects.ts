@@ -37,10 +37,12 @@ export const getProjects = cache(async (): Promise<Project[]> => {
 export const getProject = cache(async (id: string): Promise<Project | null> => {
   const result = await api(`/projects/${encodeURIComponent(id)}`);
   if (result.success) return result.data?.project ?? null;
+  // Le back-end renvoie 403 pour un projet inexistant ou inaccessible → page 404
   if (result.status === 403 || result.status === 404) return null;
   throw new Error(result.message ?? "Impossible de récupérer le projet.");
 });
 
+// Trie les projets selon la tâche ouverte la plus urgente qui m'est assignée
 export function sortProjectsByUrgency(projects: Project[], assignedTasks: Task[]) {
   const mostUrgentTask = new Map<string, Task>();
   for (const task of assignedTasks.filter(isOpenTask)) {

@@ -14,6 +14,7 @@ type Session = {
   expired: boolean;
 };
 
+// cache() : un seul appel /auth/profile par requête, même si plusieurs composants le demandent
 export const getSession = cache(async (): Promise<Session> => {
   try {
     const result = await api("/auth/profile");

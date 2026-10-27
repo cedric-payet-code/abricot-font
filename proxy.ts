@@ -4,6 +4,7 @@ import { SESSION_COOKIE } from "@/lib/session";
 
 const PUBLIC_ROUTES = ["/login", "/register"];
 
+// Protège les routes avant le rendu : sans cookie → /login, déjà connecté → /dashboard
 export function proxy(request: NextRequest) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
   const isPublicRoute = PUBLIC_ROUTES.includes(request.nextUrl.pathname);
