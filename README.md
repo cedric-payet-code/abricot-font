@@ -47,21 +47,30 @@ git clone https://github.com/cedric-payet-code/abricot-font.git abricot-front
 
 ### 1. Back-end
 
+**a. Variables d'environnement.** Le dépôt fournit un modèle, `.env.example`, à renommer en `.env` :
+
 ```bash
 cd dev-react-P10
 mv .env.example .env
 ```
 
-Ouvrir `.env` et remplacer la valeur de `JWT_SECRET` par une chaîne secrète de votre choix.
+Le fichier contient deux variables :
+
+| Variable | Valeur par défaut | À faire |
+|---|---|---|
+| `DATABASE_URL` | `"file:./db.sqlite"` | Rien : la base SQLite est créée automatiquement dans `prisma/` |
+| `JWT_SECRET` | `"MY_SECRET"` | Remplacer par une chaîne secrète de votre choix (elle sert à signer les tokens de connexion) |
+
+**b. Installation et base de données.**
 
 ```bash
-npm install
-npx prisma generate
-npx prisma migrate deploy
-npm run seed
+npm install                 # installe les dépendances
+npx prisma generate         # génère le client Prisma
+npx prisma migrate deploy   # crée la base et ses tables
+npm run seed                # remplit la base avec les données de test
 ```
 
-`npm run seed` remplit la base avec des données de test (utilisateurs, projets, tâches, commentaires).
+Le back-end est prêt ; il sera démarré à l'étape [Lancement](#lancement).
 
 ### 2. Front-end
 
