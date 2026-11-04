@@ -82,7 +82,7 @@ export default function ProjectForm({
       />
 
       {state?.error && (
-        <p role="alert" className="rounded bg-error-light px-4 py-3 text-body-s text-error-text">
+        <p role="alert" className="rounded bg-error-light px-4 py-3 text-body-s text-error">
           {state.error}
         </p>
       )}

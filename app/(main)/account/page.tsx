@@ -18,7 +18,7 @@ export default async function AccountPage() {
   if (!user) {
     return (
       <div className="flex flex-col items-start gap-4">
-        <p role="alert" className="text-body-m text-error-text">
+        <p role="alert" className="text-body-m text-error">
           Impossible de récupérer vos informations. Réessayez plus tard ou reconnectez-vous.
         </p>
         <form action={logout}>

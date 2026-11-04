@@ -1,9 +1,9 @@
 import type { TaskStatus } from "@/lib/tasks";
 
 const STATUS_STYLES: Record<TaskStatus, { label: string; className: string }> = {
-  TODO: { label: "À faire", className: "bg-error-light text-error-text" },
-  IN_PROGRESS: { label: "En cours", className: "bg-warning-light text-warning-text" },
-  DONE: { label: "Terminée", className: "bg-success-light text-success-text" },
+  TODO: { label: "À faire", className: "bg-error-light text-error" },
+  IN_PROGRESS: { label: "En cours", className: "bg-warning-light text-warning" },
+  DONE: { label: "Terminée", className: "bg-success-light text-success" },
   CANCELLED: { label: "Annulée", className: "bg-grey-200 text-grey-800" },
 };
 

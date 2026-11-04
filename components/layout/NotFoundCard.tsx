@@ -6,7 +6,7 @@ export default function NotFoundCard() {
       aria-labelledby="not-found-title"
       className="mx-auto flex w-full max-w-xl flex-col items-center gap-4 rounded-[10px] border border-grey-200 bg-white px-6 py-12 text-center md:px-14"
     >
-      <p className="text-h1 font-semibold text-brand-text">404</p>
+      <p className="text-h1 font-semibold text-brand-dark">404</p>
       <h1 id="not-found-title" className="text-h5 font-medium text-grey-800">
         Page introuvable
       </h1>

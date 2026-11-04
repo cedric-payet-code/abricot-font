@@ -184,7 +184,7 @@ abricot-front/
 - **Sécurité** : le token JWT est stocké dans un **cookie `httpOnly`**, inaccessible au JavaScript du navigateur. Tous les appels à l'API passent par le serveur Next.js (composants serveur et Server Actions) ; `API_URL` n'est jamais exposée au navigateur.
 - **Protection des pages** : `proxy.ts` redirige vers `/login` tout visiteur non connecté.
 - **Aucune bibliothèque en plus de Next.js** : modales avec `<dialog>` natif, formulaires avec `useActionState` et les Server Actions, cache avec `cache()` de React et `revalidatePath()`.
-- **Accessibilité (WCAG AA)** : structure sémantique, labels reliés aux champs, navigation au clavier avec focus visible, attributs ARIA, contrastes vérifiés. Pour atteindre le niveau AA, l'orange des textes et des boutons pleins est légèrement plus foncé que celui de la maquette.
+- **Accessibilité (WCAG AA)** : structure sémantique, labels reliés aux champs, navigation au clavier avec focus visible, attributs ARIA. Les couleurs sont reprises à l'identique de la maquette.
 - **Responsive** : du mobile (375 px) au grand écran.
 - **Qualité** : TypeScript, ESLint (avec les règles d'accessibilité `jsx-a11y`) et Prettier.
 

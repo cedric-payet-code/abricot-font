@@ -46,17 +46,17 @@ export default function ProjectTasks({
             <button
               type="button"
               aria-pressed="true"
-              className="flex h-[45px] items-center gap-2 rounded-lg bg-brand-light px-4 text-body-s text-brand-text"
+              className="flex h-[45px] items-center gap-2 rounded-lg bg-brand-light px-4 text-body-s text-brand-dark"
             >
-              <ListIcon className="text-brand-text" />
+              <ListIcon className="text-brand-dark" />
               Liste
             </button>
             <button
               type="button"
               aria-pressed="false"
-              className="flex h-[45px] items-center gap-2 rounded-lg px-4 text-body-s text-brand-text transition-colors hover:bg-brand-light"
+              className="flex h-[45px] items-center gap-2 rounded-lg px-4 text-body-s text-brand-dark transition-colors hover:bg-brand-light"
             >
-              <CalendarIcon className="text-brand-text" />
+              <CalendarIcon className="text-brand-dark" />
               Calendrier
             </button>
           </div>
@@ -91,7 +91,7 @@ export default function ProjectTasks({
 
       <div className="mt-10">
         {tasks === null ? (
-          <p role="alert" className="text-body-m text-error-text">
+          <p role="alert" className="text-body-m text-error">
             Impossible de récupérer les tâches de ce projet.
           </p>
         ) : tasks.length === 0 ? (

@@ -91,12 +91,12 @@ export default function AccountForm(initialValues: AccountFormProps) {
 
       <div aria-live="polite">
         {!confirmOpen && state?.success && (
-          <p className="rounded bg-success-light px-4 py-3 text-body-s text-success-text">
+          <p className="rounded bg-success-light px-4 py-3 text-body-s text-success">
             {state.success}
           </p>
         )}
         {!confirmOpen && state?.error && (
-          <p className="rounded bg-error-light px-4 py-3 text-body-s text-error-text">
+          <p className="rounded bg-error-light px-4 py-3 text-body-s text-error">
             {state.error}
           </p>
         )}

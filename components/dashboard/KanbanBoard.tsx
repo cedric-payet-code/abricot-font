@@ -20,7 +20,7 @@ function isInMonth(dueDate: string | undefined, reference: Date) {
 export default function KanbanBoard({ tasks }: KanbanBoardProps) {
   if (tasks === null) {
     return (
-      <p role="alert" className="text-body-m text-error-text">
+      <p role="alert" className="text-body-m text-error">
         Impossible de récupérer vos tâches.
       </p>
     );
@@ -45,7 +45,7 @@ export default function KanbanBoard({ tasks }: KanbanBoardProps) {
             >
               <h2 id={titleId} className="flex items-center gap-2 text-h5 text-grey-800">
                 {title}
-                <span className="rounded-full bg-grey-200 px-4 py-0.5 text-body-xs text-grey-800">
+                <span className="rounded-full bg-grey-200 px-4 py-0.5 text-body-xs text-grey-600">
                   {columnTasks.length}
                   <span className="sr-only"> {columnTasks.length > 1 ? "tâches" : "tâche"}</span>
                 </span>

@@ -56,7 +56,7 @@ export default function CommentForm({
       </div>
 
       {state?.error && (
-        <p id={errorId} role="alert" className="text-body-xs text-error-text">
+        <p id={errorId} role="alert" className="text-body-xs text-error">
           {state.error}
         </p>
       )}

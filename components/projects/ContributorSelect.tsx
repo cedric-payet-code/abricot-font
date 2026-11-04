@@ -159,7 +159,7 @@ export default function ContributorSelect({
       </div>
 
       {error && (
-        <p id={errorId} className="text-body-xs text-error-text">
+        <p id={errorId} className="text-body-xs text-error">
           {error}
         </p>
       )}

@@ -22,7 +22,7 @@ export default async function ProjectsPage() {
         ? error.message
         : "Le serveur est injoignable. Réessayez plus tard.";
     return (
-      <p role="alert" className="text-body-m text-error-text">
+      <p role="alert" className="text-body-m text-error">
         {message}
       </p>
     );

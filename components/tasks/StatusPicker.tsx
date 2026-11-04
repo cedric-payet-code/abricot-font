@@ -2,9 +2,9 @@ import PillRadioGroup from "@/components/ui/PillRadioGroup";
 import type { TaskStatus } from "@/lib/tasks";
 
 const OPTIONS: { value: TaskStatus; label: string; className: string }[] = [
-  { value: "TODO", label: "À faire", className: "bg-error-light text-error-text" },
-  { value: "IN_PROGRESS", label: "En cours", className: "bg-warning-light text-warning-text" },
-  { value: "DONE", label: "Terminée", className: "bg-success-light text-success-text" },
+  { value: "TODO", label: "À faire", className: "bg-error-light text-error" },
+  { value: "IN_PROGRESS", label: "En cours", className: "bg-warning-light text-warning" },
+  { value: "DONE", label: "Terminée", className: "bg-success-light text-success" },
 ];
 
 type StatusPickerProps = {

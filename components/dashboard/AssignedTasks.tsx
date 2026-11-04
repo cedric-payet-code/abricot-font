@@ -41,7 +41,7 @@ export default function AssignedTasks({ tasks }: AssignedTasksProps) {
 
       <div className="mt-10">
         {tasks === null ? (
-          <p role="alert" className="text-body-m text-error-text">
+          <p role="alert" className="text-body-m text-error">
             Impossible de récupérer vos tâches.
           </p>
         ) : tasks.length === 0 ? (

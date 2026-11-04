@@ -34,7 +34,7 @@ export default async function ProjectPage({ params, searchParams }: ProjectPageP
         ? error.message
         : "Le serveur est injoignable. Réessayez plus tard.";
     return (
-      <p role="alert" className="text-body-m text-error-text">
+      <p role="alert" className="text-body-m text-error">
         {message}
       </p>
     );
@@ -92,7 +92,7 @@ export default async function ProjectPage({ params, searchParams }: ProjectPageP
           <CreateTaskButton projectId={project.id} members={members} />
           <button
             type="button"
-            className="flex h-[50px] items-center gap-2 rounded-[10px] bg-brand-text px-6 text-body-m text-white"
+            className="flex h-[50px] items-center gap-2 rounded-[10px] bg-brand-dark px-6 text-body-m text-white"
           >
             <span aria-hidden="true">✦</span>
             IA

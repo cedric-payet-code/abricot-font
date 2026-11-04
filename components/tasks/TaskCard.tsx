@@ -52,7 +52,7 @@ export default function TaskCard({ task, projectId, members, currentUserName }: 
                 {assignees.map(({ id: assigneeId, user }) => (
                   <li key={assigneeId} className="flex items-center gap-1.5">
                     <Avatar name={user.name} />
-                    <span className="rounded-[10px] bg-grey-200 px-4 py-0.5 text-body-s text-grey-800">
+                    <span className="rounded-[10px] bg-grey-200 px-4 py-0.5 text-body-s text-grey-600">
                       {user.name}
                     </span>
                   </li>

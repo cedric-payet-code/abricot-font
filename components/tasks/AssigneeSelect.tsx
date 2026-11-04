@@ -116,7 +116,7 @@ export default function AssigneeSelect({
       </div>
 
       {error && (
-        <p id={errorId} className="text-body-xs text-error-text">
+        <p id={errorId} className="text-body-xs text-error">
           {error}
         </p>
       )}

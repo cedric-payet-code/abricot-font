@@ -30,7 +30,7 @@ export default function ConfirmDelete({
       <div className="flex flex-col gap-3 text-body-m text-grey-600">{message}</div>
 
       {state?.error && (
-        <p role="alert" className="rounded bg-error-light px-4 py-3 text-body-s text-error-text">
+        <p role="alert" className="rounded bg-error-light px-4 py-3 text-body-s text-error">
           {state.error}
         </p>
       )}
@@ -39,7 +39,7 @@ export default function ConfirmDelete({
         <button
           type="submit"
           disabled={pending}
-          className="h-[50px] rounded-[10px] bg-error-text px-7 text-body-m text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-400"
+          className="h-[50px] rounded-[10px] bg-error px-7 text-body-m text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:bg-grey-200 disabled:text-grey-400"
         >
           {pending ? "Suppression…" : confirmLabel}
         </button>

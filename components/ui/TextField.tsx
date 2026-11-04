@@ -42,7 +42,7 @@ export default function TextField({
         </p>
       )}
       {error && (
-        <p id={errorId} className="text-body-xs text-error-text">
+        <p id={errorId} className="text-body-xs text-error">
           {error}
         </p>
       )}
